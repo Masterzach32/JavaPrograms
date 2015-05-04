@@ -1,6 +1,6 @@
 package net.masterzach32.circlegame.main;
 
-import java.awt.Color;
+import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -19,7 +20,7 @@ import net.masterzach32.circlegame.util.Utilities;
 
 
 @SuppressWarnings("serial")
-public class CircleGame extends JPanel implements Runnable, KeyListener, MouseListener {
+public class CircleGame extends Canvas implements Runnable, KeyListener, MouseListener {
 	
 	public static final int WIDTH = 1440, HEIGHT = 900;
 	public String name;
@@ -27,8 +28,12 @@ public class CircleGame extends JPanel implements Runnable, KeyListener, MouseLi
 	// game thread
 	private Thread thread;
 	private boolean running;
-	public static int FPS = 60;
-	private long targetTime = 1000 / FPS;
+	/** The fps you see in game */
+	public static int fps = 0;
+	/** The number of times the fps counter will update per second. Higher numbers result in a less accurate fps counter. */
+	public int fpsupdate = 1;
+	/** The maximum amount of fps in the game, not implemented yet */
+	public int maxfps = 120;
 	
 	private Graphics2D g;
 	private BufferedImage image;
@@ -73,28 +78,30 @@ public class CircleGame extends JPanel implements Runnable, KeyListener, MouseLi
 	
 	public void run() {
 		init();
+		// Ticks
+		long lastTime = System.nanoTime();
+		final double amountOfTicks = 30;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
 		
-		long start;
-		long elapsed;
-		long wait;
-		
-		// game loop
-		while(running) {
-			start = System.nanoTime();
-			
-			tick();
-			render();
-			renderToScreen();
-		
-			elapsed = System.nanoTime() - start;
-		
-			wait = targetTime - elapsed / 1000000;
-			if(wait < 0) wait = 5;
-			try {
-				Thread.sleep(wait);
-			} catch(Exception e) {
-				e.printStackTrace();
+		// FPS
+		long lastTime2 = System.nanoTime();
+		int frames = 0;
+		while(running){
+			long time = System.nanoTime();
+			delta += (time - lastTime) / ns;
+			lastTime = time;
+				if(delta >= 1) {
+					tick();
+					delta--;
+				}
+			frames += 1 * fpsupdate;
+			if(System.nanoTime() - lastTime2 >= (1000000000L / fpsupdate) /*|| frames == maxfps*/) {
+				fps = frames;
+				frames = 0;
+				lastTime2 = System.nanoTime();
 			}
+		render();
 		}
 	}
 	
@@ -103,15 +110,17 @@ public class CircleGame extends JPanel implements Runnable, KeyListener, MouseLi
 	}
 	
 	public void render() {
+		BufferStrategy buffer = this.getBufferStrategy();
+		if(buffer == null) {
+			createBufferStrategy(4);
+			return;
+		}
+		Graphics g = buffer.getDrawGraphics();
 		World.getWorld().render(g);
 		Dots.render(g);
-		//Player.getPlayers().render();
-	}
-	
-	private void renderToScreen() {
-		Graphics g = getGraphics();
-		g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
 		g.dispose();
+		buffer.show();
+		//Player.getPlayers().render();
 	}
 
 	public void mouseClicked(MouseEvent e) {} 

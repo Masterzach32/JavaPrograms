@@ -1,0 +1,16 @@
+Latest Patch: 0.1.4 Alpha
++ Game HUD Updated! New XP Bar and Updated Health / Mana bars
+above the player and mobs!
++ MOBS! They’re finally here! Watch them wander around your world!
++ Code for different roles (Fighter, Mage, Tank) not playable yet!
++ Updated the downloader!
++ Edited the loading screen! Progress Bars!
++ Added 2 more levels.
++ More code cleanup.
+* Fixed mana bar displaying the wrong percentage.
+* Fixed lowered FPS on level select
+Bugs:
+* Mobs display same health % as the player.
+* Invincible Mobs!
+* Abilities not scaling with level.
+- Please report all bugs to the forums at http://masterzach32.net

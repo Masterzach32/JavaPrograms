@@ -51,7 +51,7 @@ public class Background {
 		y += dy;
 	}
 	
-	public void render(Graphics2D g) {
+	public void render(Graphics g) {
 		g.drawImage(image, (int)x, (int)y, CircleGame.WIDTH, CircleGame.HEIGHT,  null);
 		
 		if(x < 0) {

@@ -1,7 +1,7 @@
 package net.masterzach32.circlegame.entity;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.util.Random;
 
 import net.masterzach32.circlegame.map.World;
@@ -25,7 +25,8 @@ public class Dots {
 		boolean b = true;
 		for(int i = 0; i < dots.length; i++) {
 			if(dots[i] != null) {
-				
+				dots[i].t++;
+				if(dots[i].t == 100) dots[i] = null;
 			} else if(dots[i] == null) {
 				if(b) {
 					dots[i] = new Dots();
@@ -35,7 +36,7 @@ public class Dots {
 		}
 	}
 	
-	public static void render(Graphics2D g) {
+	public static void render(Graphics g) {
 		for(int i = 0; i < dots.length; i++) {
 			if(dots[i] != null) {
 				g.setColor(dots[i].color);
@@ -44,7 +45,7 @@ public class Dots {
 		}
 	}
 	
-	public static void drawCenteredCircle(Graphics2D g, int x, int y, int r) {
+	public static void drawCenteredCircle(Graphics g, int x, int y, int r) {
 		  x = x-(r/2);
 		  y = y-(r/2);
 		  g.fillOval(x, y, r, r);

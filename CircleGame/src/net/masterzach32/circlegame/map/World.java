@@ -1,6 +1,6 @@
 package net.masterzach32.circlegame.map;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 public class World {
 	
@@ -17,7 +17,7 @@ public class World {
 		//bg = new Background(Assets.getImageAsset("Background"), 1);
 	}
 	
-	public void render(Graphics2D g) {
+	public void render(Graphics g) {
 		//bg.render(g);
 	}
 	

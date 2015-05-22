@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import net.masterzach32.circlegame.entity.Dots;
+import net.masterzach32.circlegame.entity.Player;
 import net.masterzach32.circlegame.map.World;
 import net.masterzach32.circlegame.util.LogHelper;
 import net.masterzach32.circlegame.util.Utilities;
@@ -107,6 +108,7 @@ public class CircleGame extends Canvas implements Runnable, KeyListener, MouseLi
 	
 	public void tick() {
 		Dots.tick();
+		Player.tick();
 	}
 	
 	public void render() {

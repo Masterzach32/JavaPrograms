@@ -44,7 +44,7 @@ public interface IUpdatable {
 				
 				int result = JOptionPane.showConfirmDialog(Game.getFrame(), (Object) "An update is available!\nLocal Build: " + SpaceRunner.game.getLocalVersion() + " Server Build: " + repo.updateVersion + "\nDo you want to update now?", "Update Available - Build " + repo.updateVersion, JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
-					Path path = Paths.get(OSUtils.getHomeDirectory("space_fighters.jar"));
+					Path path = Paths.get(OSUtils.getHomeDirectory("spacefighters.jar"));
 					boolean failed = Utilities.download(SpaceRunner.game.getRepoURL() + "downloads/" + repo.updateURL, path.toString(), "Downloading Update", true);
 					if(!failed) {
 						int result2 = JOptionPane.showConfirmDialog(Game.getFrame(), (Object) "Update complete! Do you want to close\nthis instance and run the new build?", "Update Complete", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);

@@ -44,7 +44,7 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final String VERSION = "1.1.173";
+	public static final String VERSION = "1.1.174";
 	
 	// Thread and Game instance
 	private Thread tickAndRender;
@@ -94,11 +94,6 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	public synchronized void stop() {
 		OptionsFile.save();
 		logger.saveToLog();
-		/*for(int i = 1; i <= gamesPlayed; i++) {
-			System.out.println();
-			for(int  j = 0; j < i; j++)
-				System.out.print("*");
-		}*/
 		System.exit(0);
 	}
 

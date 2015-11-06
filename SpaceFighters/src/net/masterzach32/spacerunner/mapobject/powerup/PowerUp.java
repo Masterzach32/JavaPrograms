@@ -17,7 +17,6 @@ public class PowerUp extends MapObject {
 								ASBUFF = 1,
 								ATBUFF = 2,
 								SHIELD = 3,
-								// not used yet
 								MISSILE = 3,
 								NUKE = 4;
 	
@@ -37,7 +36,6 @@ public class PowerUp extends MapObject {
 		if(this.intersects(LevelState.player)) {
 			LevelState.player.addPowerup(this);
 			this.remove = true;
-			if(type == HEAL) use();
 		}
 		return this;
 	}

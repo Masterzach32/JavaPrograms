@@ -167,6 +167,7 @@ public class Player extends MapObject {
 	
 	public void addPowerup(PowerUp p) {
 		powerUp = p;
+		if(powerUp.type == PowerUp.HEAL) usePowerup();
 	}
 	
 	public void usePowerup() {

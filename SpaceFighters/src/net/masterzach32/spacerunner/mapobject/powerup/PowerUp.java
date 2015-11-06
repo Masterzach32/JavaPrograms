@@ -37,6 +37,7 @@ public class PowerUp extends MapObject {
 		if(this.intersects(LevelState.player)) {
 			LevelState.player.addPowerup(this);
 			this.remove = true;
+			if(type == HEAL) use();
 		}
 		return this;
 	}

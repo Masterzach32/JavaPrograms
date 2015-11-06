@@ -38,7 +38,7 @@ public class Player extends MapObject {
 		health = 5;
 		asTimer = 300;
 		atTimer = 300;
-		shieldTimer = 300;
+		shieldTimer = 360;
 		
 		overHeat = 0;
 		overHeatBar = 0;
@@ -104,7 +104,7 @@ public class Player extends MapObject {
 			if(shieldTimer > 0)
 				shieldTimer--;
 			else {
-				shieldTimer = 300;
+				shieldTimer = 360;
 				shield = false;
 			}
 		}
@@ -123,7 +123,7 @@ public class Player extends MapObject {
 				asTimer--;
 				overHeat = MAX_HEAT + 1;
 				if(firing <= 0) {
-					firing = 4;
+					firing = 5;
 					lazers.add(new Lazer(true, atBuff, x + (width / 2), y + (height / 2) - 4));
 				}
 			} else {

@@ -145,9 +145,10 @@ public class Player extends MapObject {
 		if(shield) g.drawImage(Assets.getImageAsset("shield"), (int) x + width/2, (int) y, width, height, null);
 		
 		int r = 6 * (int) overHeat;
-		if(r > 120) r = 120;
+		int max = MAX_HEAT * 6;
+		if(r > max) r = max;
 		if(r < 0) r = 0;
-		g.setColor(new Color(255, 120 - r, 120 - r));
+		g.setColor(new Color(255, max - r, max- r));
 		g.fillRect(10, 110, 20, (int) overHeatBar);
 		if(overHeated) g.setColor(new Color(255, 0, 0));
 		g.drawRect(10, 110, 20, 20*7 - 2);

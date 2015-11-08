@@ -81,7 +81,7 @@ public class Utilities {
 		t.setText("Starting...");
 		current.setSize(150, 50);
 		current.setValue(0);
-		current.setStringPainted(true);
+		current.setStringPainted(false);
 		frame.setLayout(new FlowLayout());
 		frame.setSize(350, 100);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

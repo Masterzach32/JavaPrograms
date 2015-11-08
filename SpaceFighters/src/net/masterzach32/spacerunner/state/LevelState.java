@@ -67,18 +67,20 @@ public class LevelState extends GameState {
 		Random r = new Random();
 		wave++;
 		player.health++;
-		manager.getEnemyList().clear();
 		for(int i = 0; i < 5 * wave; i++) {
-			manager.addEnemy(new Enemy(r.nextInt(700 * wave) + 750, r.nextInt(230) + 50));
+			manager.addEnemy(new Enemy(r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));
 		}
 		for(int i = 0; i < wave / 4; i++) {
-			manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(700 * wave) + 750, r.nextInt(230) + 50));;
+			manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));;
 		}
 	}
 
 	protected void unload() {
 		wave--;
 		player.health--;
+		manager.getEnemyList().clear();
+		manager.getEntityList().clear();
+		
 	}
 
 	public void tick() {
@@ -130,9 +132,9 @@ public class LevelState extends GameState {
 		if(player.health == 0) {
 			if(deathTimer > 0) deathTimer--;
 			g.setFont(font.deriveFont(Font.PLAIN, 26));
-			Utilities.drawCenteredString(g, "you died!", 150);
+			Utilities.drawCenteredString(g, "you died!", 180);
 			g.setFont(font);
-			if(deathTimer == 0) Utilities.drawCenteredString(g, "press any key to continue", 170);
+			if(deathTimer == 0) Utilities.drawCenteredString(g, "press any key to continue", 200);
 		}
 		if(paused) Utilities.drawCenteredString(g, "paused", 150);
 		if(player.powerUp != null) g.drawImage(player.powerUp.getIcon(), 10, 295, 50, 50, null);

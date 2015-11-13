@@ -14,9 +14,9 @@ import net.masterzach32.spacerunner.state.LevelState;
  * @author Zach Kozar
  */
 public class Enemy extends MapObject {
-	
+
 	public int fireTimer;
-	
+
 	public ArrayList<Lazer> lazers;
 	public Random random;
 
@@ -26,54 +26,52 @@ public class Enemy extends MapObject {
 		height = 45;
 		cwidth = 40;
 		cheight = 25;
-		
+
 		random = new Random();
-		
+
 		fireTimer = random.nextInt(240) + 200;
-		
+
 		lazers = new ArrayList<Lazer>();
-		
+
 		health = 2;
 		image = Assets.getImageAsset("alien");
 	}
 
 	public MapObject tick() {
-		if(fireTimer > 0) fireTimer--;
-		if(fireTimer == 0) {
+		if (fireTimer > 0)
+			fireTimer--;
+		if (fireTimer == 0) {
 			fireTimer = random.nextInt(240) + 200;
 			lazers.add(new Lazer(false, false, x + (cwidth / 2), y + (cheight / 2)));
 		}
-		
-		for(int i = 0; i < lazers.size(); i++) {
+
+		for (int i = 0; i < lazers.size(); i++) {
 			Lazer lazer = lazers.get(i);
 			lazer.tick();
-			if(!LevelState.player.flinching)
-				if(lazer.intersects(LevelState.player)) {
+			if (!LevelState.player.flinching)
+				if (lazer.intersects(LevelState.player)) {
 					lazer.remove = true;
-					if(!LevelState.player.shield) {
+					if (!LevelState.player.shield) {
 						LevelState.player.health -= 1;
 						LevelState.player.flinching = true;
 						LevelState.player.flinchTimer = System.nanoTime();
 					}
 				}
-			if(lazer.shouldRemove()) {
+			if (lazer.shouldRemove()) {
 				lazers.remove(i);
 			}
 		}
-		
-		if(health == 0) {
+
+		if (health == 0) {
 			remove = true;
 			SpaceRunner.game.addScore(100);
 		}
 		return this;
 	}
-	
+
 	public MapObject render(Graphics2D g) {
-		for(Lazer lazer : lazers) 
-			lazer.render(g);
-		
+		for (Lazer lazer : lazers) lazer.render(g);
 		super.render(g);
-		
 		return this;
 	}
 }

@@ -40,7 +40,7 @@ public interface IUpdatable {
 			int local = Integer.parseInt(SpaceRunner.game.getLocalVersion().substring(4, SpaceRunner.game.getLocalVersion().length()));
 			if(server > local) {
 				SpaceRunner.logger.logInfo("An update is available, you have build " + SpaceRunner.game.getLocalVersion() + ", Server build is " + repo.updateVersion);
-				int result = JOptionPane.showConfirmDialog(Game.getFrame(), (Object) "An update is available!\nLocal Build: " + SpaceRunner.game.getLocalVersion() + " Server Build: " + repo.updateVersion + "\nDo you want to update now?", "Update Available - Build " + repo.updateVersion, JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				int result = JOptionPane.showConfirmDialog(Game.getFrame(), (Object) "An update is available!\nLocal Build: " + SpaceRunner.game.getLocalVersion() + " Server Build: " + repo.updateVersion + "\nDo you want to update now?", "Update Available", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
 					Path path = Paths.get(OSUtils.getHomeDirectory("spacefighters.jar"));
 					boolean failed = Utilities.download(SpaceRunner.game.getRepoURL() + "downloads/" + repo.updateURL, path.toString(), "Downloading Update", true);

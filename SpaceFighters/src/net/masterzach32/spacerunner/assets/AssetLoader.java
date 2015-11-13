@@ -14,9 +14,10 @@ import net.masterzach32.spacerunner.util.*;
 public class AssetLoader {
 
 	private String s = "[ASSETS] ";
-	
+
 	/**
 	 * Loads an image from the assets folder
+	 * 
 	 * @param path
 	 * @return {@link BufferedImage}
 	 */
@@ -33,9 +34,10 @@ public class AssetLoader {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Loads the given audio file
+	 * 
 	 * @param path
 	 * @return ais
 	 */
@@ -56,10 +58,10 @@ public class AssetLoader {
 			return null;
 		}
 	}
-	
+
 	public String loadFile(String path) {
 		URL imageLocation = getClass().getResource(path);
-		if(imageLocation != null) {
+		if (imageLocation != null) {
 			SpaceRunner.logger.logInfo(s + "Loaded Map: " + path);
 			return path;
 		} else {

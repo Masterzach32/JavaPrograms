@@ -15,26 +15,21 @@ import net.masterzach32.spacerunner.state.GameState;
 import net.masterzach32.spacerunner.util.*;
 
 public class MenuState extends GameState {
-	
+
 	public int currentChoice = 0;
-	public static String[] options = {
-		"play",
-		"help",
-		"credits",
-		"quit"
-	};
-	
+	public static String[] options = { "play", "help", "credits", "quit" };
+
 	protected static Color titleColor;
 	protected static Font titleFont;
 	protected static Font subtitleFont;
-	
+
 	protected static Font font;
 	protected static Font selectfont;
 
 	public void init() {
 		bg = new Background(Assets.getImageAsset("space_bg"), 1);
 		bg.setVector(-.2, 0);
-		
+
 		titleColor = new Color(160, 0, 0);
 		Font f = null;
 		try {
@@ -44,14 +39,16 @@ public class MenuState extends GameState {
 		}
 		titleFont = f.deriveFont(Font.PLAIN, 30);
 		subtitleFont = f.deriveFont(Font.PLAIN, 18);
-		
+
 		font = f.deriveFont(Font.PLAIN, 26);
 		selectfont = f.deriveFont(Font.PLAIN, 28);
 	}
 
-	protected void load() {}
+	protected void load() {
+	}
 
-	protected void unload() {}
+	protected void unload() {
+	}
 
 	public void tick() {
 		bg.tick();
@@ -59,7 +56,7 @@ public class MenuState extends GameState {
 
 	public void render(Graphics2D g) {
 		// draw bg
-		bg.render(g);			
+		bg.render(g);
 
 		// draw title
 		g.setColor(titleColor);
@@ -68,8 +65,8 @@ public class MenuState extends GameState {
 		g.setFont(subtitleFont);
 
 		// draw menu options
-		for(int i = 0; i < options.length; i++) {
-			if(i == currentChoice) {
+		for (int i = 0; i < options.length; i++) {
+			if (i == currentChoice) {
 				g.setFont(selectfont);
 				g.setColor(Color.BLUE);
 			} else {
@@ -86,31 +83,31 @@ public class MenuState extends GameState {
 		g.drawString(enemiesKilled, SpaceRunner.WIDTH - fontMetrics.stringWidth(enemiesKilled) - 8, 310);
 		g.drawString(gamesPlayed, SpaceRunner.WIDTH - fontMetrics.stringWidth(gamesPlayed) - 8, 330);
 	}
-	
+
 	private void select() {
-		if(currentChoice == 0)
+		if (currentChoice == 0)
 			GameState.setState(SpaceRunner.level);
-		if(currentChoice == 1)
+		if (currentChoice == 1)
 			GameState.setState(SpaceRunner.help);
-		if(currentChoice == 2)
+		if (currentChoice == 2)
 			GameState.setState(SpaceRunner.info);
-		if(currentChoice == 3)
+		if (currentChoice == 3)
 			SpaceRunner.game.stop();
 	}
 
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
+		if (k == KeyEvent.VK_ENTER) {
 			select();
 		}
-		if(k == KeyEvent.VK_UP) {
+		if (k == KeyEvent.VK_UP) {
 			currentChoice--;
-			if(currentChoice == -1) {
+			if (currentChoice == -1) {
 				currentChoice = options.length - 1;
 			}
 		}
-		if(k == KeyEvent.VK_DOWN) {
+		if (k == KeyEvent.VK_DOWN) {
 			currentChoice++;
-			if(currentChoice == options.length) {
+			if (currentChoice == options.length) {
 				currentChoice = 0;
 			}
 		}

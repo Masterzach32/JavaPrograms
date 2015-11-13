@@ -12,18 +12,13 @@ import net.masterzach32.spacerunner.state.LevelState;
  * @author Zach Kozar
  */
 public class PowerUp extends MapObject {
-	
-	public static final int 	HEAL = 0,
-								ASBUFF = 1,
-								ATBUFF = 2,
-								SHIELD = 3,
-								MISSILE = 3,
-								NUKE = 4;
-	
+
+	public static final int HEAL = 0, ASBUFF = 1, ATBUFF = 2, SHIELD = 3, MISSILE = 3, NUKE = 4;
+
 	public int type;
-	
+
 	public PowerUp(int type, double x, double y) {
-		super("PowerUp-"+type, x, y);
+		super("PowerUp-" + type, x, y);
 		this.type = type;
 		this.width = 40;
 		this.height = 40;
@@ -33,20 +28,24 @@ public class PowerUp extends MapObject {
 	}
 
 	public MapObject tick() {
-		if(this.intersects(LevelState.player)) {
+		if (this.intersects(LevelState.player)) {
 			LevelState.player.addPowerup(this);
 			this.remove = true;
 		}
 		return this;
 	}
-	
+
 	public void use() {
-		if(type == HEAL) LevelState.player.health += 2;
-		if(type == ASBUFF) LevelState.player.asBuff = true;
-		if(type == ATBUFF) LevelState.player.atBuff = true;
-		if(type == SHIELD) LevelState.player.shield = true;
+		if (type == HEAL)
+			LevelState.player.health += 2;
+		if (type == ASBUFF)
+			LevelState.player.asBuff = true;
+		if (type == ATBUFF)
+			LevelState.player.atBuff = true;
+		if (type == SHIELD)
+			LevelState.player.shield = true;
 	}
-	
+
 	public BufferedImage getIcon() {
 		return Assets.getImageAsset("power_" + type);
 	}

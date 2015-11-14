@@ -1,29 +1,16 @@
 package net.masterzach32.spacerunner;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import javax.swing.JPanel;
 
 import net.masterzach32.spacerunner.api.IUpdatable;
-import net.masterzach32.spacerunner.assets.AssetLoader;
-import net.masterzach32.spacerunner.assets.Assets;
-import net.masterzach32.spacerunner.state.GameState;
-import net.masterzach32.spacerunner.state.LevelState;
-import net.masterzach32.spacerunner.state.menu.HelpState;
-import net.masterzach32.spacerunner.state.menu.InfoState;
-import net.masterzach32.spacerunner.state.menu.MenuState;
+import net.masterzach32.spacerunner.assets.*;
+import net.masterzach32.spacerunner.state.*;
+import net.masterzach32.spacerunner.state.menu.*;
 import net.masterzach32.spacerunner.util.*;
 
 /**

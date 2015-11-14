@@ -1,9 +1,7 @@
 package net.masterzach32.spacerunner.mapobject;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.Random;
+import java.awt.*;
+import java.util.*;
 
 import net.masterzach32.spacerunner.SpaceRunner;
 import net.masterzach32.spacerunner.assets.Assets;

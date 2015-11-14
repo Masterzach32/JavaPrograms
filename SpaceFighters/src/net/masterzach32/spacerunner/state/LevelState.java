@@ -1,26 +1,15 @@
 package net.masterzach32.spacerunner.state;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 
 import net.masterzach32.spacerunner.SpaceRunner;
-import net.masterzach32.spacerunner.assets.Assets;
-import net.masterzach32.spacerunner.assets.Background;
-import net.masterzach32.spacerunner.mapobject.Enemy;
-import net.masterzach32.spacerunner.mapobject.EntityManager;
-import net.masterzach32.spacerunner.mapobject.Lazer;
-import net.masterzach32.spacerunner.mapobject.MapObject;
-import net.masterzach32.spacerunner.mapobject.Player;
+import net.masterzach32.spacerunner.assets.*;
+import net.masterzach32.spacerunner.mapobject.*;
 import net.masterzach32.spacerunner.mapobject.powerup.PowerUp;
-import net.masterzach32.spacerunner.util.OptionsFile;
-import net.masterzach32.spacerunner.util.Utilities;
+import net.masterzach32.spacerunner.util.*;
 
 /**
  * The main state of the game.

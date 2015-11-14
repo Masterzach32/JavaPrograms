@@ -71,12 +71,16 @@ public class Enemy extends MapObject {
 	}
 
 	public MapObject render(Graphics2D g) {
-		for (Lazer lazer : lazers) lazer.render(g);
+		for (Lazer lazer : lazers)
+			lazer.render(g);
+		
 		super.render(g);
+		
 		g.setColor(Color.RED);
 		for (int i = 0; i < health; i++)
-			g.fillRect((int) x + i*22 + 1, (int) y + 1, 20, 4);
+			g.fillRect((int) x + i * 22 + 1, (int) y + 1, 20, 4);
 		g.setColor(Color.WHITE);
+		
 		return this;
 	}
 }

@@ -37,7 +37,7 @@ public class Game {
 			window.setResizable(false);
 			window.pack();
 		}
-		catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			Utilities.createErrorDialog("Error", "An unexpected error occured: " + e.toString(), e);
 		}
 	}

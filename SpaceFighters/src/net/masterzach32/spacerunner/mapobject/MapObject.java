@@ -49,14 +49,13 @@ public abstract class MapObject {
 	}
 
 	public boolean intersects(MapObject object) {
-		return this.getHitbox().intersects(object.getHitbox());
+		return getHitbox().intersects(object.getHitbox());
 	}
 
 	public abstract MapObject tick();
 
 	public MapObject render(Graphics2D g) {
 		g.drawImage(image, (int) x, (int) y, width, height, null);
-		g.draw(getHitbox());
 		return this;
 	}
 

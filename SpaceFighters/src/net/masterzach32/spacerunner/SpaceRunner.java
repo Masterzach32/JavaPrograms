@@ -44,7 +44,7 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final String VERSION = "1.1.178";
+	public static final String VERSION = "1.1.179";
 	
 	// Thread and Game instance
 	private Thread tickAndRender;

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.spacerunner.state.LevelState;
 
 /**
  * Keeps track of all entities besides the player
@@ -44,14 +45,27 @@ public class EntityManager {
 			for (int i = 0; i < entities.size(); i++) {
 				MapObject object = entities.get(i);
 				object.tick();
-				if (object.shouldRemove()) {
+				object.x -= 2;
+				if (object.x <= -100)
+					object.remove = true;
+				if (object.shouldRemove())
 					entities.remove(i);
-				}
 			}
 		if (enemies != null)
 			for (int i = 0; i < enemies.size(); i++) {
 				Enemy object = enemies.get(i);
 				object.tick();
+				object.x -= 2;
+				for (int j = 0; j < LevelState.player.lazers.size(); j++) {
+					Lazer lazer = LevelState.player.lazers.get(j);
+					if (lazer.intersects(object)) {
+						lazer.remove = true;
+						if (lazer.blue)
+							object.health -= 2;
+						else
+							object.health -= 1;
+					}
+				}
 				if (object.shouldRemove()) {
 					enemies.remove(i);
 					SpaceRunner.enemiesKilled++;

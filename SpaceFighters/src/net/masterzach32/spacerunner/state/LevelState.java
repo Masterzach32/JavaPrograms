@@ -91,32 +91,6 @@ public class LevelState extends GameState {
 				bg.tick();
 				player.tick();
 				manager.updateEntities();
-				for (int i = 0; i < manager.getEnemyList().size(); i++) {
-					Enemy object = manager.getEnemyList().get(i);
-					for (int j = 0; j < player.lazers.size(); j++) {
-						Lazer lazer = player.lazers.get(j);
-						if (lazer.intersects(object)) {
-							lazer.remove = true;
-							if (lazer.blue)
-								object.health -= 2;
-							else
-								object.health -= 1;
-						}
-					}
-					object.x -= 2;
-					if (object.x <= -100) {
-						object.remove = true;
-						SpaceRunner.game.addScore(-50);
-					}
-				}
-				for (int i = 0; i < manager.getEntityList().size(); i++) {
-					MapObject object = manager.getEntityList().get(i);
-					object.x -= 2;
-					if (object.x <= -100) {
-						object.remove = true;
-					}
-				}
-
 				if (manager.getEnemyList().size() == 0) load();
 			}
 		}

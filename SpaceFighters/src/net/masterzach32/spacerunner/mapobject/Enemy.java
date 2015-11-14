@@ -67,6 +67,10 @@ public class Enemy extends MapObject {
 			remove = true;
 			SpaceRunner.game.addScore(100);
 		}
+		if (x <= -100) {
+			remove = true;
+			SpaceRunner.game.addScore(-50);
+		}
 		return this;
 	}
 

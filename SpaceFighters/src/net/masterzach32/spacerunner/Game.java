@@ -21,13 +21,14 @@ public class Game {
 	
 	public static void main(String[] args) {
 		try {
-			// makes our ui for the update system look nice :)
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			window = new JFrame("SpaceFighters - " + SpaceRunner.VERSION + " Beta");
 			SpaceRunner.logger.logInfo("Launching SpaceRunner Build " + SpaceRunner.VERSION);
 			SpaceRunner.logger.logInfo("OS: " + System.getProperty("os.name") + " (" + System.getProperty("os.version") + ")");
 			SpaceRunner.logger.logInfo("OS Archetecture: " + System.getProperty("os.arch"));
 			SpaceRunner.logger.logInfo("Java Version: " + System.getProperty("java.version"));
+			// makes our ui for the update system look nice :)
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			SpaceRunner.logger.logInfo("Creating JFrame");
+			window = new JFrame("SpaceFighters - " + SpaceRunner.VERSION + " Beta");
 			OptionsFile.load();
 			SpaceRunner.game = new SpaceRunner();
 			resizeGameFrame(false);

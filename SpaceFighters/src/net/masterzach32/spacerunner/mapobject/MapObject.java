@@ -56,6 +56,7 @@ public abstract class MapObject {
 
 	public MapObject render(Graphics2D g) {
 		g.drawImage(image, (int) x, (int) y, width, height, null);
+		g.draw(getHitbox());
 		return this;
 	}
 

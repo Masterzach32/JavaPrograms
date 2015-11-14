@@ -1,5 +1,6 @@
 package net.masterzach32.spacerunner.mapobject;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
@@ -62,7 +63,7 @@ public class Enemy extends MapObject {
 			}
 		}
 
-		if (health == 0) {
+		if (health <= 0) {
 			remove = true;
 			SpaceRunner.game.addScore(100);
 		}
@@ -72,6 +73,10 @@ public class Enemy extends MapObject {
 	public MapObject render(Graphics2D g) {
 		for (Lazer lazer : lazers) lazer.render(g);
 		super.render(g);
+		g.setColor(Color.RED);
+		for (int i = 0; i < health; i++)
+			g.fillRect((int) x + i*22 + 1, (int) y + 1, 20, 4);
+		g.setColor(Color.WHITE);
 		return this;
 	}
 }

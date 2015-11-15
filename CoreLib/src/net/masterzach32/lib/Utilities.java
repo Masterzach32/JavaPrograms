@@ -1,36 +1,15 @@
-package net.masterzach32.spacerunner.util;
+package net.masterzach32.lib;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.awt.*;
 import java.util.List;
+import java.io.*;
+import java.net.*;
+import java.nio.charset.Charset;
+import java.nio.file.*;
+import java.text.*;
+import java.util.*;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-
-import net.masterzach32.spacerunner.Game;
-import net.masterzach32.spacerunner.SpaceRunner;
+import javax.swing.*;
 
 public class Utilities {
 
@@ -115,7 +94,7 @@ public class Utilities {
 			failed = false;
 		} catch(Exception e) {
 			t.setText("Download Failed!");
-			SpaceRunner.logger.logError("An error occured while downloading: " + url);
+			LogHelper.logger.logError("An error occured while downloading: " + url);
 			e.printStackTrace();
 			createErrorDialog("Download Error", "An error occured while downloading this file:\n" + url, e);
 			failed = true;
@@ -137,7 +116,7 @@ public class Utilities {
         FontMetrics fm = g.getFontMetrics();
         int totalWidth = (fm.stringWidth(text) * 2) + 4;
         
-        int x = (((Game.getFrame().getWidth() / SpaceRunner.SCALE) - (totalWidth / 2)) / 2);
+        int x = (((CoreLib.game.getWindow().getWidth() / CoreLib.game.getScale()) - (totalWidth / 2)) / 2);
         g.drawString(text, x, y);
 	}
 	
@@ -159,7 +138,7 @@ public class Utilities {
 	    final JFileChooser saveAsFileChooser = new JFileChooser();
 	    
 	    saveAsFileChooser.setApproveButtonText("Save");
-	    int actionDialog = saveAsFileChooser.showSaveDialog(Game.getFrame());
+	    int actionDialog = saveAsFileChooser.showSaveDialog(CoreLib.game.getWindow());
 	    if (actionDialog != JFileChooser.APPROVE_OPTION) {
 	       return null;
 	    }
@@ -194,7 +173,7 @@ public class Utilities {
 	 */
 	public static Point getMousePosition() {
 		Point p1 = MouseInfo.getPointerInfo().getLocation();
-		Point p2 = Game.getFrame().getLocationOnScreen();
+		Point p2 = CoreLib.game.getWindow().getLocationOnScreen();
 		return new Point(p1.x - p2.x, p1.y - p2.y);
 	}
 	

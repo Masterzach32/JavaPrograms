@@ -1,4 +1,4 @@
-package net.masterzach32.spacerunner.util;
+package net.masterzach32.lib;
 
 import java.io.File;
 import java.util.Locale;
@@ -60,13 +60,13 @@ public final class OSUtils {
 		OSUtils.OSType ostype = OSUtils.getOperatingSystemType();
 		switch (ostype) {
 		    case Windows:
-		    	file = new File(System.getProperty("user.home") + "\\masterzach32\\spacefighters\\" + fileName);
+		    	file = new File(System.getProperty("user.home") + "\\masterzach32\\" + CoreLib.game.getPackageName() + "\\" + fileName);
 		    	break;
 		    case MacOS: 
-		    	file = new File(System.getProperty("user.home") + "/masterzach32/spacefighters/" + fileName);
+		    	file = new File(System.getProperty("user.home") + "/masterzach32/" + CoreLib.game.getPackageName() + "/" + fileName);
 		    	break;
 		    case Linux: 
-		    	file = new File(System.getProperty("user.home") + "/masterzach32/spacefighters/" + fileName);
+		    	file = new File(System.getProperty("user.home") + "/masterzach32/" + CoreLib.game.getPackageName() + "/" + fileName);
 		    	break;
 		    case Other: 
 		    	file = new File(fileName);

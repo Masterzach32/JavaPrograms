@@ -1,8 +1,6 @@
-package net.masterzach32.spacerunner.assets.sfx;
+package net.masterzach32.lib;
 
 import javax.sound.sampled.*;
-
-import net.masterzach32.spacerunner.util.Utilities;
 
 /**
  * A class for playing audio files in the game. This is not used in

@@ -5,13 +5,15 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import net.masterzach32.spacerunner.api.IUpdatable;
 import net.masterzach32.spacerunner.assets.*;
 import net.masterzach32.spacerunner.state.*;
 import net.masterzach32.spacerunner.state.menu.*;
 import net.masterzach32.spacerunner.util.*;
+
+import net.masterzach32.lib.*;
 
 /**
  * A simple space fighting game for AP Computer Science PP3
@@ -22,7 +24,7 @@ import net.masterzach32.spacerunner.util.*;
  * @author Zach Kozar
  * @version 1.1 Beta
  */
-public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdatable {
+public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game {
 
 	public static final boolean isUpdateEnabled = true;
 	
@@ -31,12 +33,13 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final String VERSION = "1.1.179";
+	public static final String VERSION = "1.1.180";
 	
 	// Thread and Game instance
 	private Thread tickAndRender;
 	private JPanel panel;
-	public static SpaceRunner game;
+	public static SpaceFighters game;
+	public static CoreLib lib;
 	
 	// tick timer
 	private boolean running;
@@ -57,7 +60,7 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	public static AssetLoader al = new AssetLoader();
 	
 	// output log for space fighters
-	public static LogHelper logger = new LogHelper("SpaceFighters", VERSION);
+	public static LogHelper logger = new LogHelper("SpaceFighters");
 	
 	// font for high score
 	private Font font;
@@ -65,7 +68,7 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	/**
 	 * Create our game instance and start the thread
 	 */
-	public SpaceRunner() {
+	public SpaceFighters() {
 		super();
 		panel = new JPanel();
 		panel.setFocusable(true);
@@ -85,7 +88,7 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 	}
 
 	protected void init() {
-		IUpdatable.checkForUpdates();
+		
 		
 		logger.logInfo("Loading Java Graphics");
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -95,7 +98,7 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 		Assets.preinit();
 		
 		logger.logInfo("Creating Window");
-		Game.getFrame().setVisible(true);
+		Launcher.getFrame().setVisible(true);
 		
 		running = true;
 		
@@ -233,11 +236,43 @@ public class SpaceRunner implements Runnable, KeyListener, MouseListener, IUpdat
 
 	public void keyTyped(KeyEvent e) {}
 
-	public String getLocalVersion() {
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	public int getHeight() {
+		return HEIGHT;
+	}
+	public int getScale() {
+		return SCALE;
+	}
+
+	public boolean isUpdateEnabled() {
+		return isUpdateEnabled;
+	}
+
+	public JFrame getWindow() {
+		return Launcher.getFrame();
+	}
+
+	public String getVersion() {
 		return VERSION;
 	}
 
 	public String getRepoURL() {
-		return "http://masterzach32.net/repo/spacefighters/";
+		return "http://masterzach32.net/repo/";
+	}
+
+	public String getPackageName() {
+		return "spacefighters";
+	}
+
+	public String getName() {
+		return "SpaceFighters";
+	}
+	
+	public boolean close() {
+		stop();
+		return true;
 	}
 }

@@ -5,7 +5,8 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.Random;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.lib.*;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.*;
 import net.masterzach32.spacerunner.mapobject.*;
 import net.masterzach32.spacerunner.mapobject.powerup.PowerUp;
@@ -40,8 +41,8 @@ public class LevelState extends GameState {
 		bg = new Background(Assets.getImageAsset("space_bg"), 1);
 		bg.setVector(-.3, 0);
 
-		SpaceRunner.score = 0;
-		SpaceRunner.dscore = 0;
+		SpaceFighters.score = 0;
+		SpaceFighters.dscore = 0;
 		wave = 0;
 		deathTimer = 300;
 
@@ -110,33 +111,33 @@ public class LevelState extends GameState {
 		g.setFont(font);
 		FontMetrics fontMetrics = g.getFontMetrics();
 		String tscore;
-		if (SpaceRunner.tscore > 0) tscore = new String("+" + SpaceRunner.tscore);
-		else if (SpaceRunner.tscore < 0) tscore = new String("" + SpaceRunner.tscore);
+		if (SpaceFighters.tscore > 0) tscore = new String("+" + SpaceFighters.tscore);
+		else if (SpaceFighters.tscore < 0) tscore = new String("" + SpaceFighters.tscore);
 		else tscore = "";
-		String score = new String("your score: " + SpaceRunner.dscore);
+		String score = new String("your score: " + SpaceFighters.dscore);
 		// score coloring
-		int r = 1 * SpaceRunner.tscore / 5;
+		int r = 1 * SpaceFighters.tscore / 5;
 		if (r > 255) r = 255;
 		if (r < 0) r = 0;
 		g.setColor(new Color(255, 255 - r, 255 - r));
-		g.drawString(tscore, SpaceRunner.WIDTH - fontMetrics.stringWidth(tscore) - 8, 25);
+		g.drawString(tscore, SpaceFighters.WIDTH - fontMetrics.stringWidth(tscore) - 8, 25);
 		g.setColor(Color.WHITE);
-		g.drawString(score, SpaceRunner.WIDTH - fontMetrics.stringWidth(score) - 8, 330);
+		g.drawString(score, SpaceFighters.WIDTH - fontMetrics.stringWidth(score) - 8, 330);
 	}
 
 	public void keyPressed(int k) {
 		if (deathTimer == 0) {
-			GameState.setState(SpaceRunner.menu);
+			GameState.setState(SpaceFighters.menu);
 			init();
 			OptionsFile.save();
-			SpaceRunner.gamesPlayed++;
+			SpaceFighters.gamesPlayed++;
 		}
 		if (k == KeyEvent.VK_UP) player.up = true;
 		if (k == KeyEvent.VK_DOWN) player.down = true;
 		if (k == KeyEvent.VK_LEFT) player.left = true;
 		if (k == KeyEvent.VK_RIGHT) player.right = true;
 		if (k == KeyEvent.VK_SPACE) player.setFiring();
-		if (k == KeyEvent.VK_ESCAPE) GameState.setState(SpaceRunner.menu);
+		if (k == KeyEvent.VK_ESCAPE) GameState.setState(SpaceFighters.menu);
 		if (k == KeyEvent.VK_Z) if (player.powerUp != null) player.usePowerup();
 		if (k == KeyEvent.VK_P) paused = !paused;
 	}

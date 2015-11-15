@@ -3,7 +3,7 @@ package net.masterzach32.spacerunner.mapobject;
 import java.awt.*;
 import java.util.*;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.state.LevelState;
 
@@ -63,11 +63,11 @@ public class Enemy extends MapObject {
 
 		if (health <= 0) {
 			remove = true;
-			SpaceRunner.game.addScore(100);
+			SpaceFighters.game.addScore(100);
 		}
 		if (x <= -100) {
 			remove = true;
-			SpaceRunner.game.addScore(-50);
+			SpaceFighters.game.addScore(-50);
 		}
 		return this;
 	}

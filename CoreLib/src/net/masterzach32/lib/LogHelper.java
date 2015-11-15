@@ -1,4 +1,4 @@
-package net.masterzach32.spacerunner.util;
+package net.masterzach32.lib;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,13 +11,13 @@ import java.util.Date;
 
 public class LogHelper {
 	
-	private String name, gameVersion;
-	private ArrayList<String> log;
+	private String name;
+	private static ArrayList<String> log = new ArrayList<String>();
 	
-	public LogHelper(String name, String gameVersion) {
+	protected static LogHelper logger = new LogHelper("CoreLib");
+	
+	public LogHelper(String name) {
 		this.name = name;
-		this.gameVersion = gameVersion;
-		log = new ArrayList<String>();
 	}
 
 	public void logInfo(String message) {
@@ -47,12 +47,12 @@ public class LogHelper {
     		if(!logFolder.exists()) {
     			logFolder.mkdir();
     		}
-            writer = new PrintWriter(OSUtils.getHomeDirectory("logs/" + name + "" + gameVersion + "_" + dateFormat.format(date) + ".log"), "UTF-8");
+            writer = new PrintWriter(OSUtils.getHomeDirectory("logs/" + dateFormat.format(date) + ".log"), "UTF-8");
             for(String message : log) {
                 writer.println(message);
             }
             writer.close();
-            System.out.print("Log saved to logs/" + name + "" + gameVersion + "_" + dateFormat.format(date) + ".log");
+            System.out.print("Log saved to " + CoreLib.game.getPackageName() +  "/logs/" + dateFormat.format(date) + ".log");
             return true;
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();

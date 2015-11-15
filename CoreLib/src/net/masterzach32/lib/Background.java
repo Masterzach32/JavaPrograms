@@ -1,9 +1,7 @@
-package net.masterzach32.spacerunner.assets;
+package net.masterzach32.lib;
 
 import java.awt.*;
 import java.awt.image.*;
-
-import net.masterzach32.spacerunner.SpaceRunner;
 
 /**
  * A simple class to make moving backgrounds possible
@@ -14,10 +12,7 @@ public class Background {
 
 	private BufferedImage image;
 
-	private double x;
-	private double y;
-	private double dx;
-	private double dy;
+	private double x, y, dx, dy;
 
 	private double moveScale;
 
@@ -37,8 +32,8 @@ public class Background {
 	 * @param y
 	 */
 	public void setPosition(double x, double y) {
-		this.x = (x * moveScale) % SpaceRunner.WIDTH;
-		this.y = (y * moveScale) % SpaceRunner.HEIGHT;
+		this.x = (x * moveScale) % CoreLib.game.getWidth();
+		this.y = (y * moveScale) % CoreLib.game.getHeight();
 	}
 
 	/**
@@ -58,14 +53,12 @@ public class Background {
 	}
 
 	public void render(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, SpaceRunner.WIDTH, SpaceRunner.HEIGHT, null);
+		g.drawImage(image, (int) x, (int) y, CoreLib.game.getWidth(), CoreLib.game.getHeight(), null);
 
-		if (x < 0) {
-			g.drawImage(image, (int) x + SpaceRunner.WIDTH, (int) y, SpaceRunner.WIDTH, SpaceRunner.HEIGHT, null);
-		}
-		if (x > 0) {
-			g.drawImage(image, (int) x - SpaceRunner.WIDTH, (int) y, SpaceRunner.WIDTH, SpaceRunner.HEIGHT, null);
-		}
+		if (x < 0)
+			g.drawImage(image, (int) x + CoreLib.game.getWidth(), (int) y, CoreLib.game.getWidth(), CoreLib.game.getHeight(), null);
+		if (x > 0)
+			g.drawImage(image, (int) x - CoreLib.game.getWidth(), (int) y, CoreLib.game.getWidth(), CoreLib.game.getHeight(), null);
 		if (x >= 640 || x <= -640)
 			x = 0;
 	}

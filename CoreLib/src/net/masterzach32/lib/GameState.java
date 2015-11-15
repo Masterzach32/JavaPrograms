@@ -1,10 +1,6 @@
-package net.masterzach32.spacerunner.state;
+package net.masterzach32.lib;
 
 import java.awt.Graphics2D;
-
-import net.masterzach32.spacerunner.SpaceRunner;
-import net.masterzach32.spacerunner.assets.Background;
-import net.masterzach32.spacerunner.assets.sfx.AudioPlayer;
 
 /**
  * GameState system from SideScroller Project. Allows for a state to do stuff
@@ -15,7 +11,7 @@ import net.masterzach32.spacerunner.assets.sfx.AudioPlayer;
 public abstract class GameState {
 
 	protected static GameState state = null;
-	protected static SpaceRunner game = SpaceRunner.game;
+	protected Game game;
 
 	protected Background bg;
 	protected AudioPlayer bgMusic;

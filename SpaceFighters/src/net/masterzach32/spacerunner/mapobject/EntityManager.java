@@ -3,7 +3,7 @@ package net.masterzach32.spacerunner.mapobject;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.state.LevelState;
 
 /**
@@ -68,7 +68,7 @@ public class EntityManager {
 				}
 				if (object.shouldRemove()) {
 					enemies.remove(i);
-					SpaceRunner.enemiesKilled++;
+					SpaceFighters.enemiesKilled++;
 				}
 			}
 	}

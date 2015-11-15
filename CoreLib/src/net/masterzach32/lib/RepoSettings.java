@@ -1,4 +1,4 @@
-package net.masterzach32.spacerunner.util;
+package net.masterzach32.lib;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import java.io.RandomAccessFile;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
-
-import net.masterzach32.spacerunner.SpaceRunner;
 
 /**
  * Class responsible for reading repository settings file and getting latest version.
@@ -42,12 +40,12 @@ public class RepoSettings {
 		try {
 			obj = JSONValue.parseWithException(json);
 		} catch (ParseException e) {
-			SpaceRunner.logger.logError("Error while parsing repo settings: " + e.toString());
+			LogHelper.logger.logError("Error while parsing repo settings: " + e.toString());
 			return false;
 		}
 		if (!(obj instanceof JSONObject)) {
 			// give up!
-			SpaceRunner.logger.logError("Repo file does not begin with a JSON Object");
+			LogHelper.logger.logError("Repo file does not begin with a JSON Object");
 			return false;
 		}
 		repoSettings = (JSONObject)obj;
@@ -55,12 +53,12 @@ public class RepoSettings {
 		// Check the options file version
 		Integer version = JSONHelper.getInteger(repoSettings, "repoVersion");
 		if (version == null) {
-			SpaceRunner.logger.logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
+			LogHelper.logger.logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
 		}
 		else if (version > REPO_VERSION) {
 			// a higher version number indicates an incompatible file that
 			// this version of the game does not know how to read
-			SpaceRunner.logger.logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
+			LogHelper.logger.logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
 			return false;
 		}
 
@@ -90,7 +88,7 @@ public class RepoSettings {
 		String path = location;
 		byte[] buffer;
 		
-		SpaceRunner.logger.logInfo("Loading repo settings file");
+		LogHelper.logger.logInfo("Loading repo settings file");
 		try {
 			// File optionsFile = new File(path);
 			fin = new RandomAccessFile(path, "r");		// "r" = open file for reading only
@@ -100,7 +98,7 @@ public class RepoSettings {
 			// ignore missing options file
 			return false;
 		} catch (IOException e) {
-			SpaceRunner.logger.logError("Problem reading " + path);
+			LogHelper.logger.logError("Problem reading " + path);
 			e.printStackTrace();
 			return false;
 		} finally {

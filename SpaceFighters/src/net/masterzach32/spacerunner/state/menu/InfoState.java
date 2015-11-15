@@ -8,11 +8,9 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.lib.*;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
-import net.masterzach32.spacerunner.assets.Background;
-import net.masterzach32.spacerunner.state.GameState;
-import net.masterzach32.spacerunner.util.Utilities;
 
 public class InfoState extends GameState {
 
@@ -85,7 +83,7 @@ public class InfoState extends GameState {
 	}
 
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ESCAPE) GameState.setState(SpaceRunner.menu);
+		if(k == KeyEvent.VK_ESCAPE) GameState.setState(SpaceFighters.menu);
 	}
 
 	public void keyReleased(int k) {}

@@ -6,7 +6,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.lib.*;
+import net.masterzach32.spacerunner.SpaceFighters;
 
 /** 
  * OptionsFile contains static methods that use the JSON.simple library
@@ -30,14 +31,14 @@ public class OptionsFile {
 		
 		gameOptions.put("optionsVersion", OPTIONS_VERSION);
 		
-		gameOptions.put("gamesPlayed", SpaceRunner.gamesPlayed);
-		gameOptions.put("enemiesKilled", SpaceRunner.enemiesKilled);
-		gameOptions.put("highScore", SpaceRunner.highScore);
+		gameOptions.put("gamesPlayed", SpaceFighters.gamesPlayed);
+		gameOptions.put("enemiesKilled", SpaceFighters.enemiesKilled);
+		gameOptions.put("highScore", SpaceFighters.highScore);
 		
 		JSONObject graphicsOptions = new JSONObject();
-		graphicsOptions.put("scale", SpaceRunner.SCALE);
-		graphicsOptions.put("width", SpaceRunner.WIDTH);
-		graphicsOptions.put("height", SpaceRunner.HEIGHT);
+		graphicsOptions.put("scale", SpaceFighters.SCALE);
+		graphicsOptions.put("width", SpaceFighters.WIDTH);
+		graphicsOptions.put("height", SpaceFighters.HEIGHT);
 		gameOptions.put("graphicsOptions", graphicsOptions);
 
 		return gameOptions.toString();
@@ -51,12 +52,12 @@ public class OptionsFile {
 		try {
 			obj = JSONValue.parseWithException(json);
 		} catch (ParseException e) {
-			SpaceRunner.logger.logError("Error while parsing game options file: " + e.toString());
+			SpaceFighters.logger.logError("Error while parsing game options file: " + e.toString());
 			return false;
 		}
 		if (!(obj instanceof JSONObject)) {
 			// give up!
-			SpaceRunner.logger.logError("Options file does not begin with a JSON Object");
+			SpaceFighters.logger.logError("Options file does not begin with a JSON Object");
 			return false;
 		}
 		gameOptions = (JSONObject)obj;
@@ -64,12 +65,12 @@ public class OptionsFile {
 		// Check the options file version
 		Integer version = JSONHelper.getInteger(gameOptions, "optionsVersion");
 		if (version == null) {
-			SpaceRunner.logger.logWarning("Attempting to read options file without a value for 'optionsVersion'");
+			SpaceFighters.logger.logWarning("Attempting to read options file without a value for 'optionsVersion'");
 		}
 		else if (version > OPTIONS_VERSION) {
 			// a higher version number indicates an incompatible file that
 			// this version of the game does not know how to read
-			SpaceRunner.logger.logWarning("Could not read options file from a newer version of the game: " + gameOptions.get("gameVersion"));
+			SpaceFighters.logger.logWarning("Could not read options file from a newer version of the game: " + gameOptions.get("gameVersion"));
 			return false;
 		}
 
@@ -77,19 +78,19 @@ public class OptionsFile {
 		Integer i; Boolean b;
 		
 		i = JSONHelper.getInteger(gameOptions, "highScore");
-		if (i != null) SpaceRunner.highScore = i;
+		if (i != null) SpaceFighters.highScore = i;
 		i = JSONHelper.getInteger(gameOptions, "gamesPlayed");
-		if (i != null) SpaceRunner.gamesPlayed = i;
+		if (i != null) SpaceFighters.gamesPlayed = i;
 		i = JSONHelper.getInteger(gameOptions, "enemiesKilled");
-		if (i != null) SpaceRunner.enemiesKilled = i;
+		if (i != null) SpaceFighters.enemiesKilled = i;
 		
 		graphicsOptions = JSONHelper.getJSONObject(gameOptions, "graphicsOptions");
 		i = JSONHelper.getInteger(graphicsOptions, "scale");
-		if (i != null) SpaceRunner.SCALE = i;
+		if (i != null) SpaceFighters.SCALE = i;
 		i = JSONHelper.getInteger(graphicsOptions, "width");
-		if (i != null) SpaceRunner.WIDTH = i;
+		if (i != null) SpaceFighters.WIDTH = i;
 		i = JSONHelper.getInteger(graphicsOptions, "height");
-		if (i != null) SpaceRunner.HEIGHT = i;
+		if (i != null) SpaceFighters.HEIGHT = i;
 
 		return true;
 	}
@@ -102,13 +103,13 @@ public class OptionsFile {
 		BufferedWriter fout = null;
 		String path = getOptionsPath();
 		
-		SpaceRunner.logger.logInfo("Saving game options");
+		SpaceFighters.logger.logInfo("Saving game options");
 		try {
 			// File optionsFile = new File(path);
 			fout = new BufferedWriter(new FileWriter(path));
 			fout.write(optionsToJSON());
 		} catch (IOException e) {
-			SpaceRunner.logger.logError("Problem writing " + path);
+			SpaceFighters.logger.logError("Problem writing " + path);
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -127,7 +128,7 @@ public class OptionsFile {
 		String path = getOptionsPath();
 		byte[] buffer;
 		
-		SpaceRunner.logger.logInfo("Loading game options");
+		SpaceFighters.logger.logInfo("Loading game options");
 		try {
 			// File optionsFile = new File(path);
 			fin = new RandomAccessFile(path, "r");		// "r" = open file for reading only
@@ -137,7 +138,7 @@ public class OptionsFile {
 			// ignore missing options file
 			return false;
 		} catch (IOException e) {
-			SpaceRunner.logger.logError("Problem reading " + path);
+			SpaceFighters.logger.logError("Problem reading " + path);
 			e.printStackTrace();
 			return false;
 		} finally {

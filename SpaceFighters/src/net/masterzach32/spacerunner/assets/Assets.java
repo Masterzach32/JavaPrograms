@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import javax.sound.sampled.AudioInputStream;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.spacerunner.SpaceFighters;
 
 public class Assets {
 	
@@ -23,21 +23,21 @@ public class Assets {
 	
 	public static void init() {
 		// Images
-		images.put("space_bg", 	SpaceRunner.al.loadImage("/backgrounds/space.png"));
-		images.put("alien", 	SpaceRunner.al.loadImage("/entities/alien.png"));
-		images.put("spaceship", SpaceRunner.al.loadImage("/entities/spaceship.png"));
-		images.put("powerBox_0",SpaceRunner.al.loadImage("/entities/powerBox_0.png"));
-		images.put("powerBox_1",SpaceRunner.al.loadImage("/entities/powerBox_1.png"));
-		images.put("powerBox_2",SpaceRunner.al.loadImage("/entities/powerBox_2.png"));
-		images.put("powerBox_3",SpaceRunner.al.loadImage("/entities/powerBox_3.png"));
-		images.put("lazer", 	SpaceRunner.al.loadImage("/particles/lazer.png"));
-		images.put("lazer_blue",SpaceRunner.al.loadImage("/particles/lazer_blue.png"));
-		images.put("shield",	SpaceRunner.al.loadImage("/particles/shield.png"));
-		images.put("heart", 	SpaceRunner.al.loadImage("/particles/heart.png"));
-		images.put("power_0", 	SpaceRunner.al.loadImage("/particles/power_0.png"));
-		images.put("power_1", 	SpaceRunner.al.loadImage("/particles/power_1.png"));
-		images.put("power_2", 	SpaceRunner.al.loadImage("/particles/power_2.png"));
-		images.put("power_3", 	SpaceRunner.al.loadImage("/particles/power_3.png"));
+		images.put("space_bg", 	SpaceFighters.al.loadImage("/backgrounds/space.png"));
+		images.put("alien", 	SpaceFighters.al.loadImage("/entities/alien.png"));
+		images.put("spaceship", SpaceFighters.al.loadImage("/entities/spaceship.png"));
+		images.put("powerBox_0",SpaceFighters.al.loadImage("/entities/powerBox_0.png"));
+		images.put("powerBox_1",SpaceFighters.al.loadImage("/entities/powerBox_1.png"));
+		images.put("powerBox_2",SpaceFighters.al.loadImage("/entities/powerBox_2.png"));
+		images.put("powerBox_3",SpaceFighters.al.loadImage("/entities/powerBox_3.png"));
+		images.put("lazer", 	SpaceFighters.al.loadImage("/particles/lazer.png"));
+		images.put("lazer_blue",SpaceFighters.al.loadImage("/particles/lazer_blue.png"));
+		images.put("shield",	SpaceFighters.al.loadImage("/particles/shield.png"));
+		images.put("heart", 	SpaceFighters.al.loadImage("/particles/heart.png"));
+		images.put("power_0", 	SpaceFighters.al.loadImage("/particles/power_0.png"));
+		images.put("power_1", 	SpaceFighters.al.loadImage("/particles/power_1.png"));
+		images.put("power_2", 	SpaceFighters.al.loadImage("/particles/power_2.png"));
+		images.put("power_3", 	SpaceFighters.al.loadImage("/particles/power_3.png"));
 
 		files.put("cyberspace", "assets/fonts/cyberspace.otf");
 	}

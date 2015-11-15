@@ -1,4 +1,4 @@
-package net.masterzach32.spacerunner.util;
+package net.masterzach32.lib;
 
 import org.json.simple.JSONObject;
 

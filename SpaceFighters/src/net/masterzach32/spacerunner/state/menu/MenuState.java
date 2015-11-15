@@ -9,10 +9,9 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.lib.*;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.*;
-import net.masterzach32.spacerunner.state.GameState;
-import net.masterzach32.spacerunner.util.*;
 
 public class MenuState extends GameState {
 
@@ -78,21 +77,21 @@ public class MenuState extends GameState {
 		g.setColor(Color.WHITE);
 		g.setFont(font.deriveFont(Font.PLAIN, 17));
 		FontMetrics fontMetrics = g.getFontMetrics();
-		String enemiesKilled = new String("enemies killed: " + SpaceRunner.enemiesKilled);
-		String gamesPlayed = new String("games played: " + SpaceRunner.gamesPlayed);
-		g.drawString(enemiesKilled, SpaceRunner.WIDTH - fontMetrics.stringWidth(enemiesKilled) - 8, 310);
-		g.drawString(gamesPlayed, SpaceRunner.WIDTH - fontMetrics.stringWidth(gamesPlayed) - 8, 330);
+		String enemiesKilled = new String("enemies killed: " + SpaceFighters.enemiesKilled);
+		String gamesPlayed = new String("games played: " + SpaceFighters.gamesPlayed);
+		g.drawString(enemiesKilled, SpaceFighters.WIDTH - fontMetrics.stringWidth(enemiesKilled) - 8, 310);
+		g.drawString(gamesPlayed, SpaceFighters.WIDTH - fontMetrics.stringWidth(gamesPlayed) - 8, 330);
 	}
 
 	private void select() {
 		if (currentChoice == 0)
-			GameState.setState(SpaceRunner.level);
+			GameState.setState(SpaceFighters.level);
 		if (currentChoice == 1)
-			GameState.setState(SpaceRunner.help);
+			GameState.setState(SpaceFighters.help);
 		if (currentChoice == 2)
-			GameState.setState(SpaceRunner.info);
+			GameState.setState(SpaceFighters.info);
 		if (currentChoice == 3)
-			SpaceRunner.game.stop();
+			SpaceFighters.game.stop();
 	}
 
 	public void keyPressed(int k) {

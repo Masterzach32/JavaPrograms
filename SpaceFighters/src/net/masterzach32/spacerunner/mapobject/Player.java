@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import net.masterzach32.spacerunner.SpaceRunner;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.mapobject.powerup.PowerUp;
 
@@ -58,9 +58,9 @@ public class Player extends MapObject {
 
 		// window collision
 		if (x < 0) x = 0;
-		if (x > SpaceRunner.WIDTH - width) x = SpaceRunner.WIDTH - width;
+		if (x > SpaceFighters.WIDTH - width) x = SpaceFighters.WIDTH - width;
 		if (y < 0) y = 0;
-		if (y > SpaceRunner.HEIGHT - height) y = SpaceRunner.HEIGHT - height;
+		if (y > SpaceFighters.HEIGHT - height) y = SpaceFighters.HEIGHT - height;
 
 		// random checks
 		if (firing > 0) firing--;

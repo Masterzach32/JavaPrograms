@@ -72,7 +72,6 @@ public final class OSUtils {
 		    	file = new File(fileName);
 		    	break;
 		}
-		
 		return file.toString();
 	}
 }

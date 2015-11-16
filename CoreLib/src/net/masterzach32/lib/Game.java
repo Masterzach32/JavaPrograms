@@ -23,6 +23,8 @@ public interface Game {
 	
 	public JFrame getWindow();
 	
+	public LogHelper getLogger();
+	
 	public int getBuildNumber();
 	
 	public String getRepoURL();
@@ -40,11 +42,11 @@ public interface Game {
 	 */
 	public static boolean checkForUpdates(Game game) {
 		if(!game.isUpdateEnabled()) {
-			LogHelper.logger.logInfo("Updates are disabled. This is probably because you are running a beta or nightly build.");
+			CoreLib.game.getLogger().logInfo("Updates are disabled. This is probably because you are running a beta or nightly build.");
 			return false;
 		}
 		// get server settings
-		LogHelper.logger.logInfo("Checking for updates");
+		CoreLib.game.getLogger().logInfo("Checking for updates");
 		Path p = Paths.get(OSUtils.getHomeDirectory("repo_settings.json"));
 		Utilities.download(game.getRepoURL() + game.getPackageName() + "/settings.json", p.toString(), "", false);
 		RepoSettings repo = new RepoSettings(p.toString());
@@ -53,7 +55,7 @@ public interface Game {
 		int server = repo.updateBuild;
 		int local = game.getBuildNumber();
 		if(server > local) {
-			LogHelper.logger.logInfo("Updating to server build " + server);
+			CoreLib.game.getLogger().logInfo("Updating to server build " + server);
 			Path path = Paths.get(OSUtils.getHomeDirectory(game.getPackageName() + ".jar"));
 			boolean failed = Utilities.download(game.getRepoURL() + game.getPackageName() + "/downloads/" + game.getPackageName() + "_" + repo.updateBuild + ".jar", path.toString(), "Updating " + repo.name, false);
 			if(!failed) {
@@ -66,7 +68,7 @@ public interface Game {
 					e.printStackTrace();
 				}
 			}
-		} else LogHelper.logger.logInfo("No update is available");
+		} else CoreLib.game.getLogger().logInfo("No update is available");
 		return false;
 	}	
 }

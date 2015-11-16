@@ -41,12 +41,12 @@ public class RepoSettings {
 		try {
 			obj = JSONValue.parseWithException(json);
 		} catch (ParseException e) {
-			LogHelper.logger.logError("Error while parsing repo settings: " + e.toString());
+			CoreLib.game.getLogger().logError("Error while parsing repo settings: " + e.toString());
 			return false;
 		}
 		if (!(obj instanceof JSONObject)) {
 			// give up!
-			LogHelper.logger.logError("Repo file does not begin with a JSON Object");
+			CoreLib.game.getLogger().logError("Repo file does not begin with a JSON Object");
 			return false;
 		}
 		repoSettings = (JSONObject)obj;
@@ -54,12 +54,12 @@ public class RepoSettings {
 		// Check the options file version
 		Integer version = JSONHelper.getInteger(repoSettings, "repoVersion");
 		if (version == null) {
-			LogHelper.logger.logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
+			CoreLib.game.getLogger().logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
 		}
 		else if (version > REPO_VERSION) {
 			// a higher version number indicates an incompatible file that
 			// this version of the game does not know how to read
-			LogHelper.logger.logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
+			CoreLib.game.getLogger().logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
 			return false;
 		}
 
@@ -89,7 +89,7 @@ public class RepoSettings {
 		String path = location;
 		byte[] buffer;
 		
-		LogHelper.logger.logInfo("Loading repo settings file");
+		CoreLib.game.getLogger().logInfo("Loading repo settings file");
 		try {
 			// File optionsFile = new File(path);
 			fin = new RandomAccessFile(path, "r");		// "r" = open file for reading only
@@ -99,7 +99,7 @@ public class RepoSettings {
 			// ignore missing options file
 			return false;
 		} catch (IOException e) {
-			LogHelper.logger.logError("Problem reading " + path);
+			CoreLib.game.getLogger().logError("Problem reading " + path);
 			e.printStackTrace();
 			return false;
 		} finally {

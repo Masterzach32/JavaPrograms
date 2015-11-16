@@ -94,7 +94,7 @@ public class Utilities {
 			failed = false;
 		} catch(Exception e) {
 			t.setText("Download Failed!");
-			LogHelper.logger.logError("An error occured while downloading: " + url);
+			CoreLib.game.getLogger().logError("An error occured while downloading: " + url);
 			e.printStackTrace();
 			createErrorDialog("Download Error", "An error occured while downloading this file:\n" + url, e);
 			failed = true;
@@ -175,20 +175,6 @@ public class Utilities {
 		Point p1 = MouseInfo.getPointerInfo().getLocation();
 		Point p2 = CoreLib.game.getWindow().getLocationOnScreen();
 		return new Point(p1.x - p2.x, p1.y - p2.y);
-	}
-	
-	/**
-	 * Checks to see if one entity is within another entities range.
-	 * 
-	 * FIXME: Finish this method later
-	 * 
-	 * @param range
-	 * @return
-	 */
-	public static boolean checkRange(int range) {
-		boolean inRange = false;
-		
-		return inRange;
 	}
 	
 	/**

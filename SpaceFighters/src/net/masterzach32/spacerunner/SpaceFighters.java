@@ -255,6 +255,10 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	public JFrame getWindow() {
 		return Launcher.getFrame();
 	}
+	
+	public LogHelper getLogger() {
+		return logger;
+	}
 
 	public int getBuildNumber() {
 		return BUILD;

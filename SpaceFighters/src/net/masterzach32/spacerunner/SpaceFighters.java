@@ -33,7 +33,8 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final String VERSION = "1.1.180";
+	public static final int BUILD = 181;
+	public static final String VERSION = "1.0.1." + BUILD;
 	
 	// Thread and Game instance
 	private Thread tickAndRender;
@@ -255,8 +256,8 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 		return Launcher.getFrame();
 	}
 
-	public String getVersion() {
-		return VERSION;
+	public int getBuildNumber() {
+		return BUILD;
 	}
 
 	public String getRepoURL() {

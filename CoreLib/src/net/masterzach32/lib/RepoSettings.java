@@ -23,9 +23,10 @@ public class RepoSettings {
 	 */
 	public static final int REPO_VERSION = 1;
 	
-	public String name, version, location;
+	public String name, repoVersion, location;
 	
-	public String updateVersion, updateURL;
+	public int updateBuild;
+	public String updateURL;
 	public String[] updateChanges;
 
 	public RepoSettings(String location) {
@@ -63,16 +64,16 @@ public class RepoSettings {
 		}
 
 		// Check for each option and update if present
-		String s;
+		String s; Integer i;
 		
 		s = JSONHelper.getString(repoSettings, "gameName");
 		if (s != null) this.name = s;
-		s = JSONHelper.getString(repoSettings, "repoVersion");
-		if (s != null) this.version = s;
+		i = JSONHelper.getInteger(repoSettings, "repoVersion");
+		if (i != null) this.repoVersion = s;
 		
 		JSONObject update = JSONHelper.getJSONObject(repoSettings, "updateInfo");
-		s = JSONHelper.getString(update, "version");
-		if (s != null) this.updateVersion = s;
+		i = JSONHelper.getInteger(update, "build");
+		if (i != null) this.updateBuild = i;
 		s = JSONHelper.getString(update, "serverFile");
 		if (s != null) this.updateURL = s;
 		

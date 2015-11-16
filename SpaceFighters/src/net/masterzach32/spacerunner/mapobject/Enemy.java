@@ -41,26 +41,8 @@ public class Enemy extends MapObject {
 			fireTimer--;
 		if (fireTimer == 0) {
 			fireTimer = random.nextInt(240) + 200;
-			lazers.add(new Lazer(false, false, x + (cwidth / 2), y + (cheight / 2)));
+			LevelState.manager.getEntityList().add(new Lazer(this, false, false, x + (cwidth / 2), y + (cheight / 2)));
 		}
-
-		for (int i = 0; i < lazers.size(); i++) {
-			Lazer lazer = lazers.get(i);
-			lazer.tick();
-			if (!LevelState.player.flinching)
-				if (lazer.intersects(LevelState.player)) {
-					lazer.remove = true;
-					if (!LevelState.player.shield) {
-						LevelState.player.health -= 1;
-						LevelState.player.flinching = true;
-						LevelState.player.flinchTimer = System.nanoTime();
-					}
-				}
-			if (lazer.shouldRemove()) {
-				lazers.remove(i);
-			}
-		}
-
 		if (health <= 0) {
 			remove = true;
 			SpaceFighters.game.addScore(100);
@@ -73,14 +55,12 @@ public class Enemy extends MapObject {
 	}
 
 	public MapObject render(Graphics2D g) {
-		for (Lazer lazer : lazers)
-			lazer.render(g);
+		for (Lazer lazer : lazers) lazer.render(g);
 		
 		super.render(g);
 		
 		g.setColor(Color.RED);
-		for (int i = 0; i < health; i++)
-			g.fillRect((int) x + i * 22 + 1, (int) y + 1, 20, 4);
+		for (int i = 0; i < health; i++) g.fillRect((int) x + i * 22 + 1, (int) y + 1, 20, 4);
 		g.setColor(Color.WHITE);
 		
 		return this;

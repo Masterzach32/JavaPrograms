@@ -3,6 +3,7 @@ package net.masterzach32.spacerunner.mapobject;
 import java.awt.Graphics2D;
 
 import net.masterzach32.spacerunner.assets.Assets;
+import net.masterzach32.spacerunner.state.LevelState;
 
 /**
  * pew pew!
@@ -11,11 +12,12 @@ import net.masterzach32.spacerunner.assets.Assets;
  */
 public class Lazer extends MapObject {
 
-	public int dx = 12;
+	public int dx = 14;
 	public int timer;
 	public boolean right, blue;
+	private MapObject source;
 
-	public Lazer(boolean right, boolean blue, double x, double y) {
+	public Lazer(MapObject source, boolean right, boolean blue, double x, double y) {
 		super("Lazer", x, y);
 
 		width = 20;
@@ -26,6 +28,7 @@ public class Lazer extends MapObject {
 
 		timer = 45;
 
+		this.source = source;
 		this.right = right;
 		this.blue = blue;
 
@@ -38,6 +41,20 @@ public class Lazer extends MapObject {
 		x += dx;
 		if (timer > 0) timer--;
 		if (timer == 0) remove = true;
+		if (!(source instanceof Player) && this.intersects(LevelState.player)) {
+			remove = true;
+			LevelState.player.health -= 1;
+			LevelState.player.flinching = true;
+			LevelState.player.flinchTimer = System.nanoTime();
+		}
+		for(int i = 0; i < LevelState.manager.getEnemyList().size(); i++) {
+			Enemy enemy = LevelState.manager.getEnemyList().get(i);
+			if(!(source instanceof Enemy) && enemy.intersects(this)) {
+				remove = true;
+				enemy.health--;
+				if(blue) enemy.health--;
+			}
+		}
 		return this;
 	}
 

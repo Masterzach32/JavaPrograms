@@ -2,11 +2,11 @@ package net.masterzach32.spacerunner.mapobject;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 
 import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.mapobject.powerup.PowerUp;
+import net.masterzach32.spacerunner.state.LevelState;
 
 /**
  * Main player class
@@ -19,8 +19,7 @@ public class Player extends MapObject {
 	public boolean flinching;
 	public long flinchTimer;
 	public int firing = 0;
-
-	public ArrayList<Lazer> lazers;
+	
 	public PowerUp powerUp;
 
 	public boolean asBuff = false, atBuff = false, shield = false;
@@ -45,8 +44,6 @@ public class Player extends MapObject {
 		heatTimer = 0;
 
 		image = Assets.getImageAsset("spaceship");
-
-		lazers = new ArrayList<Lazer>();
 	}
 
 	public MapObject tick() {
@@ -83,15 +80,6 @@ public class Player extends MapObject {
 		if (overHeatBar < 7 * overHeat) overHeatBar += .8;
 		if (overHeatBar > 7 * overHeat) overHeatBar -= .8;
 
-		// update lazers
-		for (int i = 0; i < lazers.size(); i++) {
-			Lazer lazer = lazers.get(i);
-			lazer.tick();
-			if (lazer.shouldRemove()) {
-				lazers.remove(i);
-			}
-		}
-
 		// check done flinching
 		if (flinching) {
 			long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
@@ -122,7 +110,7 @@ public class Player extends MapObject {
 				overHeat = MAX_HEAT + 1;
 				if (firing <= 0) {
 					firing = 5;
-					lazers.add(new Lazer(true, atBuff, x + (width / 2), y + (height / 2) - 4));
+					LevelState.manager.getEntityList().add(new Lazer(this, true, atBuff, x + (width / 2), y + (height / 2) - 4));
 				}
 			} else {
 				asTimer = 300;
@@ -134,10 +122,6 @@ public class Player extends MapObject {
 	}
 
 	public MapObject render(Graphics2D g) {
-		for (int i = 0; i < lazers.size(); i++) {
-			Lazer lazer = lazers.get(i);
-			lazer.render(g);
-		}
 		super.render(g);
 
 		if (shield) g.drawImage(Assets.getImageAsset("shield"), (int) x + width / 2, (int) y, width, height, null);
@@ -160,7 +144,7 @@ public class Player extends MapObject {
 			heatTimer = 90;
 			firing = 10;
 			overHeat++;
-			lazers.add(new Lazer(true, atBuff, x + (width / 2), y + (height / 2) - 4));
+			LevelState.manager.getEntityList().add(new Lazer(this, true, atBuff, x + (width / 2), y + (height / 2) - 4));
 		}
 	}
 

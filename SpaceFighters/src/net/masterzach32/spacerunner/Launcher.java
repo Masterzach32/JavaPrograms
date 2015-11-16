@@ -37,6 +37,7 @@ public class Launcher {
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			window.setResizable(false);
 			window.pack();
+			SpaceFighters.game.tickAndRender.start();
 		}
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			Utilities.createErrorDialog("Error", "An unexpected error occured: " + e.toString(), e);

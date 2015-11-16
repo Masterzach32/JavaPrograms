@@ -33,11 +33,11 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final int BUILD = 183;
+	public static final int BUILD = 185;
 	public static final String VERSION = "1.0.1." + BUILD;
 	
 	// Thread and Game instance
-	private Thread tickAndRender;
+	protected Thread tickAndRender;
 	private JPanel panel;
 	public static SpaceFighters game;
 	public static CoreLib lib;
@@ -78,7 +78,6 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 			tickAndRender = new Thread(this);
 			panel.addKeyListener(this);
 			panel.addMouseListener(this);
-			tickAndRender.start();
 		}
 	}
 	

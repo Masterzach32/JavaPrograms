@@ -55,7 +55,7 @@ public abstract class MapObject {
 	public abstract MapObject tick();
 
 	public MapObject render(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, width, height, null);
+		if(onScreen())  g.drawImage(image, (int) x, (int) y, width, height, null);
 		return this;
 	}
 
@@ -69,6 +69,10 @@ public abstract class MapObject {
 		pos.put("y", y);
 		mapobject.put("position", pos);
 		return mapobject.toJSONString();
+	}
+	
+	public boolean onScreen() {
+		return (x < 700);
 	}
 
 	public boolean shouldRemove() {

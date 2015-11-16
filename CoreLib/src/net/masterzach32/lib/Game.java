@@ -55,7 +55,7 @@ public interface Game {
 		if(server > local) {
 			LogHelper.logger.logInfo("Updating to server build " + server);
 			Path path = Paths.get(OSUtils.getHomeDirectory(game.getPackageName() + ".jar"));
-			boolean failed = Utilities.download(game.getRepoURL() + game.getPackageName() + "/downloads/" + game.getPackageName() + "_" + repo.updateBuild + ".jar", path.toString(), "Updating " + repo.name, true);
+			boolean failed = Utilities.download(game.getRepoURL() + game.getPackageName() + "/downloads/" + game.getPackageName() + "_" + repo.updateBuild + ".jar", path.toString(), "Updating " + repo.name, false);
 			if(!failed) {
 				try {
 					ProcessBuilder pb = new ProcessBuilder("java", "-jar", path.toString());

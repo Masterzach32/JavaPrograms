@@ -44,7 +44,7 @@ public class EntityManager {
 			for (int i = 0; i < entities.size(); i++) {
 				MapObject object = entities.get(i);
 				object.tick();
-				object.x -= 2;
+				if(!(object instanceof Lazer)) object.x -= 2;
 				if (object.x <= -100)
 					object.remove = true;
 				if (object.shouldRemove())
@@ -63,11 +63,15 @@ public class EntityManager {
 	}
 
 	public void renderEntities(Graphics2D g) {
-		for (MapObject object : entities) {
-			object.render(g);
+		synchronized (entities) {
+			for (MapObject object : entities) {
+				object.render(g);
+			}
 		}
-		for (Enemy object : enemies) {
-			object.render(g);
+		synchronized (enemies) {
+			for (Enemy object : enemies) {
+				object.render(g);
+			}
 		}
 	}
 }

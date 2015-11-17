@@ -33,7 +33,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final int BUILD = 185;
+	public static final int BUILD = 186;
 	public static final String VERSION = "1.0.1." + BUILD;
 	
 	// Thread and Game instance
@@ -45,6 +45,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	// tick timer
 	private boolean running;
 	public static int FPS = 60;
+	private double fps;
 	private long targetTime;
 	
 	// what you see
@@ -141,6 +142,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 				render();
 
 				elapsed = System.nanoTime() - start;
+				fps = 100000000.0 / (elapsed);
 
 				wait = targetTime - elapsed / 1000000;
 				if(wait < 0) wait = 5;
@@ -190,6 +192,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 		FontMetrics fontMetrics = g.getFontMetrics();
 		String shighScore = new String("high score: " + highScore);
 		g.drawString(shighScore, WIDTH - fontMetrics.stringWidth(shighScore) - 8, 350);
+		g.drawString((int) fps + "", 0, 350);
 		renderToScreen();
 	}
 	

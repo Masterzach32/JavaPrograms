@@ -59,7 +59,7 @@ public class LevelState extends GameState {
 			wave++;
 			player.health++;
 			for (int i = 0; i < 5 * wave; i++) {
-				manager.addEnemy(new Enemy(r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));
+				manager.addEnemy(new Enemy(r.nextInt(675 * wave) + 900, r.nextInt(230) + 50));
 			}
 			for (int i = 0; i < wave / 4; i++) {
 				manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));
@@ -68,7 +68,7 @@ public class LevelState extends GameState {
 	}
 
 	protected void unload() {
-
+		
 	}
 
 	public void tick() {

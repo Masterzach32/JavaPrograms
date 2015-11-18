@@ -18,7 +18,7 @@ public class PowerUp extends MapObject {
 	public int type;
 
 	public PowerUp(int type, double x, double y) {
-		super("PowerUp-" + type, x, y);
+		super("PowerUp_" + type, x, y);
 		this.type = type;
 		this.width = 40;
 		this.height = 40;
@@ -36,14 +36,10 @@ public class PowerUp extends MapObject {
 	}
 
 	public void use() {
-		if (type == HEAL)
-			LevelState.player.health += 2;
-		if (type == ASBUFF)
-			LevelState.player.asBuff = true;
-		if (type == ATBUFF)
-			LevelState.player.atBuff = true;
-		if (type == SHIELD)
-			LevelState.player.shield = true;
+		if (type == HEAL) LevelState.player.health += 2;
+		if (type == ASBUFF) LevelState.player.asBuff = true;
+		if (type == ATBUFF) LevelState.player.atBuff = true;
+		if (type == SHIELD) LevelState.player.shield = true;
 	}
 
 	public BufferedImage getIcon() {

@@ -15,8 +15,6 @@ import net.masterzach32.spacerunner.state.LevelState;
 public class Enemy extends MapObject {
 
 	public int fireTimer;
-
-	public ArrayList<Lazer> lazers;
 	public Random random;
 
 	public Enemy(double x, double y) {
@@ -30,15 +28,12 @@ public class Enemy extends MapObject {
 
 		fireTimer = random.nextInt(240) + 200;
 
-		lazers = new ArrayList<Lazer>();
-
 		health = 2;
 		image = Assets.getImageAsset("alien");
 	}
 
 	public MapObject tick() {
-		if (fireTimer > 0)
-			fireTimer--;
+		if (fireTimer > 0) fireTimer--;
 		if (fireTimer == 0) {
 			fireTimer = random.nextInt(240) + 200;
 			LevelState.manager.getEntityList().add(new Lazer(this, false, false, x + (cwidth / 2), y + (cheight / 2)));
@@ -55,8 +50,6 @@ public class Enemy extends MapObject {
 	}
 
 	public MapObject render(Graphics2D g) {
-		for (Lazer lazer : lazers) lazer.render(g);
-		
 		super.render(g);
 		
 		g.setColor(Color.RED);

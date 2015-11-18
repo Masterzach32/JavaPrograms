@@ -51,11 +51,16 @@ public abstract class MapObject {
 	public boolean intersects(MapObject object) {
 		return getHitbox().intersects(object.getHitbox());
 	}
+	
+	public boolean hit(int damage, MapObject source) {
+		this.health -= damage;
+		return true;
+	}
 
 	public abstract MapObject tick();
 
 	public MapObject render(Graphics2D g) {
-		if(onScreen())  g.drawImage(image, (int) x, (int) y, width, height, null);
+		if(onScreen()) g.drawImage(image, (int) x, (int) y, width, height, null);
 		return this;
 	}
 

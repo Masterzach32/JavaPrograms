@@ -25,7 +25,7 @@ public class Assets {
 		// Images
 		images.put("space_bg", 	SpaceFighters.al.loadImage("/backgrounds/space.png"));
 		images.put("alien", 	SpaceFighters.al.loadImage("/entities/alien.png"));
-		//images.put("boss", 	    SpaceFighters.al.loadImage("/entities/boss.png"));
+		images.put("boss", 	    SpaceFighters.al.loadImage("/entities/boss.png"));
 		images.put("spaceship", SpaceFighters.al.loadImage("/entities/spaceship.png"));
 		images.put("powerBox_0",SpaceFighters.al.loadImage("/entities/powerBox_0.png"));
 		images.put("powerBox_1",SpaceFighters.al.loadImage("/entities/powerBox_1.png"));
@@ -62,7 +62,7 @@ public class Assets {
 	}
 	
 	/**
-	 * Returns the given map asset
+	 * Returns the given file asset
 	 * @param s
 	 * @return String
 	 */

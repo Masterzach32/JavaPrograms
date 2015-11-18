@@ -58,11 +58,11 @@ public class LevelState extends GameState {
 			Random r = new Random();
 			wave++;
 			player.health++;
-			for (int i = 0; i < 5 * wave; i++) {
-				manager.addEnemy(new Enemy(r.nextInt(675 * wave) + 900, r.nextInt(230) + 50));
+			for (int i = 0; i < 6 * wave; i++) {
+				manager.addEnemy(new Enemy(r.nextInt(680 * wave) + 900, r.nextInt(230) + 50));
 			}
 			for (int i = 0; i < wave / 4; i++) {
-				manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));
+				manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(680 * wave) + 900, r.nextInt(230) + 50));
 			}
 		}
 	}

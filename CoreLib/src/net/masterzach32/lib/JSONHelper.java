@@ -8,6 +8,19 @@ import org.json.simple.JSONObject;
  * @author Zach Kozar
  */
 public class JSONHelper {
+	
+	/** 
+	 * Attempts to retrieve an integer value from obj with the given key/name.
+	 * Returns null if the key is not present or has a non-numeric value.
+	 * (Floating-point values will be rounded or truncated).
+	 */
+	public static Double getDouble(JSONObject obj, String key) {
+		Object keyobj = obj.get(key);
+		if (keyobj instanceof java.lang.Double) {
+			return new Double(((Number) keyobj).doubleValue());
+		}
+		else return null;
+	}
 
 	/** 
 	 * Attempts to retrieve an integer value from obj with the given key/name.

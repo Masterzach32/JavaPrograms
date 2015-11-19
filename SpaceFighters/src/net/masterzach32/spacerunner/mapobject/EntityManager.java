@@ -13,18 +13,18 @@ import net.masterzach32.spacerunner.SpaceFighters;
 public class EntityManager {
 
 	private ArrayList<MapObject> entities;
-	private ArrayList<Enemy> enemies;
+	private ArrayList<MapObject> enemies;
 
 	public EntityManager() {
 		entities = new ArrayList<MapObject>();
-		enemies = new ArrayList<Enemy>();
+		enemies = new ArrayList<MapObject>();
 	}
 
 	public ArrayList<MapObject> getEntityList() {
 		return entities;
 	}
 
-	public ArrayList<Enemy> getEnemyList() {
+	public ArrayList<MapObject> getEnemyList() {
 		return enemies;
 	}
 
@@ -32,7 +32,7 @@ public class EntityManager {
 		entities.add(object);
 	}
 
-	public void addEnemy(Enemy enemy) {
+	public void addEnemy(MapObject enemy) {
 		enemies.add(enemy);
 	}
 
@@ -52,7 +52,7 @@ public class EntityManager {
 			}
 		if (enemies != null)
 			for (int i = 0; i < enemies.size(); i++) {
-				Enemy object = enemies.get(i);
+				MapObject object = enemies.get(i);
 				object.tick();
 				object.x -= 2;
 				if (object.shouldRemove()) {
@@ -69,7 +69,7 @@ public class EntityManager {
 			}
 		}
 		synchronized (enemies) {
-			for (Enemy object : enemies) {
+			for (MapObject object : enemies) {
 				object.render(g);
 			}
 		}

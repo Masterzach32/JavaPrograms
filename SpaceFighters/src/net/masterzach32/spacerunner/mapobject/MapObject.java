@@ -25,7 +25,7 @@ public abstract class MapObject {
 
 	public int health;
 
-	public boolean remove = false;
+	public boolean facingRight, remove = false;
 
 	public MapObject(String name, double x, double y) {
 		this.name = name;
@@ -60,7 +60,11 @@ public abstract class MapObject {
 	public abstract MapObject tick();
 
 	public MapObject render(Graphics2D g) {
-		if(onScreen()) g.drawImage(image, (int) x, (int) y, width, height, null);
+		if(onScreen()) {
+			if(facingRight) g.drawImage(image, (int) x, (int) y, width, height, null);
+			else g.drawImage(image, (int) x + width, (int) y + height, -width, -height, null);
+			//g.draw(getHitbox());
+		}
 		return this;
 	}
 

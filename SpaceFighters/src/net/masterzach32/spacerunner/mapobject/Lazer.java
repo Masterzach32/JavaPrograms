@@ -14,7 +14,7 @@ public class Lazer extends MapObject {
 
 	public int dx = 14;
 	public int timer;
-	public boolean right, blue;
+	public boolean blue;
 	private MapObject source;
 
 	public Lazer(MapObject source, boolean right, boolean blue, double x, double y) {
@@ -29,7 +29,7 @@ public class Lazer extends MapObject {
 		timer = 45;
 
 		this.source = source;
-		this.right = right;
+		this.facingRight = right;
 		this.blue = blue;
 
 		if (!blue) image = Assets.getImageAsset("lazer");
@@ -43,24 +43,23 @@ public class Lazer extends MapObject {
 		if (timer == 0) remove = true;
 		if (!(source instanceof Player) && this.intersects(LevelState.player)) {
 			remove = true;
-			LevelState.player.health -= 1;
+			LevelState.player.hit(1, source);
 			LevelState.player.flinching = true;
 			LevelState.player.flinchTimer = System.nanoTime();
 		}
 		for(int i = 0; i < LevelState.manager.getEnemyList().size(); i++) {
-			Enemy enemy = LevelState.manager.getEnemyList().get(i);
+			MapObject enemy = LevelState.manager.getEnemyList().get(i);
 			if(!(source instanceof Enemy) && enemy.intersects(this)) {
 				remove = true;
-				enemy.health--;
-				if(blue) enemy.health--;
+				enemy.hit(1, source);
+				if(blue) enemy.hit(1, source);
 			}
 		}
 		return this;
 	}
 
 	public MapObject render(Graphics2D g) {
-		if (right) super.render(g);
-		else g.drawImage(image, (int) x + width, (int) y + height, -width, -height, null);
+		super.render(g);
 		return this;
 	}
 }

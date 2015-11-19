@@ -27,6 +27,8 @@ public class Enemy extends MapObject {
 		random = new Random();
 
 		fireTimer = random.nextInt(240) + 200;
+		
+		facingRight = true;
 
 		health = 2;
 		image = Assets.getImageAsset("alien");

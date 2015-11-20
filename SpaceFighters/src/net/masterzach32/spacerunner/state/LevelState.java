@@ -54,33 +54,30 @@ public class LevelState extends GameState {
 	}
 
 	protected void load() {
-		if(manager.getEnemyList().size() == 0) {
+		if(manager.getEnemyList().size() == 0 && player.health > 0) {
 			Random r = new Random();
 			wave++;
 			player.health++;
-			for (int i = 0; i < 6 * wave; i++) {
-				manager.addEnemy(new Enemy(r.nextInt(680 * wave) + 900, r.nextInt(230) + 50));
+			for (int i = 0; i < 5 * wave; i++) {
+				manager.addEnemy(new Enemy(r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));
 			}
 			for (int i = 0; i < wave / 4; i++) {
-				manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(680 * wave) + 900, r.nextInt(230) + 50));
+				manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(700 * wave) + 900, r.nextInt(230) + 50));
 			}
-			//manager.addEnemy(new Boss(r.nextInt(680 * wave) + 900, 85));
+			//if(wave % 5 == 0) manager.addEnemy(new Boss(wave, r.nextInt(725 * wave) + 900, 85));
 		}
 	}
 
 	protected void unload() {
-		
+		if (player.health <= 0) player.health = 1;
 	}
 
 	public void tick() {
 		if (!paused) {
-			if (player.health > 0) {
-				// update everything
-				bg.tick();
-				player.tick();
-				manager.updateEntities();
-				if (manager.getEnemyList().size() == 0) load();
-			}
+			bg.tick();
+			player.tick();
+			manager.updateEntities();
+			if (manager.getEnemyList().size() == 0) load();
 		}
 	}
 
@@ -130,14 +127,16 @@ public class LevelState extends GameState {
 			OptionsFile.save();
 			SpaceFighters.gamesPlayed++;
 		}
-		if (k == KeyEvent.VK_UP) player.up = true;
-		if (k == KeyEvent.VK_DOWN) player.down = true;
-		if (k == KeyEvent.VK_LEFT) player.left = true;
-		if (k == KeyEvent.VK_RIGHT) player.right = true;
-		if (k == KeyEvent.VK_SPACE) player.setFiring();
-		if (k == KeyEvent.VK_ESCAPE) GameState.setState(SpaceFighters.menu);
-		if (k == KeyEvent.VK_Z) if (player.powerUp != null) player.usePowerup();
-		if (k == KeyEvent.VK_P) paused = !paused;
+		if (player.health > 0) {
+			if (k == KeyEvent.VK_UP) player.up = true;
+			if (k == KeyEvent.VK_DOWN) player.down = true;
+			if (k == KeyEvent.VK_LEFT) player.left = true;
+			if (k == KeyEvent.VK_RIGHT) player.right = true;
+			if (k == KeyEvent.VK_SPACE) player.setFiring();
+			if (k == KeyEvent.VK_ESCAPE) GameState.setState(SpaceFighters.menu);
+			if (k == KeyEvent.VK_Z) if (player.powerUp != null) player.usePowerup();
+			if (k == KeyEvent.VK_P) paused = !paused;
+		}
 	}
 
 	public void keyReleased(int k) {

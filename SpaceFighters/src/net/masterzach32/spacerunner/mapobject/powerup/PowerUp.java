@@ -1,5 +1,6 @@
 package net.masterzach32.spacerunner.mapobject.powerup;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import net.masterzach32.spacerunner.assets.Assets;
@@ -16,6 +17,7 @@ public class PowerUp extends MapObject {
 	public static final int HEAL = 0, ASBUFF = 1, ATBUFF = 2, SHIELD = 3, MISSILE = 3, NUKE = 4;
 
 	public int type;
+	public boolean active;
 
 	public PowerUp(int type, double x, double y) {
 		super("PowerUp_" + type, x, y);
@@ -25,6 +27,7 @@ public class PowerUp extends MapObject {
 		this.cwidth = 40;
 		this.cheight = 40;
 		facingRight = true;
+		active = false;
 		image = Assets.getImageAsset("powerBox_" + type);
 	}
 
@@ -34,6 +37,12 @@ public class PowerUp extends MapObject {
 			this.remove = true;
 		}
 		return this;
+	}
+	
+	public void renderBar(Graphics2D g, int ticksLeft, int total) {
+		int percentage = 50*ticksLeft/total;;
+		g.fillRect(10, 285, percentage, 10);
+		g.drawRect(10, 285, 50, 10);
 	}
 
 	public void use() {

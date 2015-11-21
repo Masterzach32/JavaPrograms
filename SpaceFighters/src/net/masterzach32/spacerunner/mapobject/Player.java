@@ -89,37 +89,6 @@ public class Player extends MapObject {
 				flinching = false;
 			}
 		}
-		// update shield
-		if (shield) {
-			if (shieldTimer > 0) shieldTimer--;
-			else {
-				shieldTimer = 360;
-				shield = false;
-			}
-		}
-		// update attack buff
-		if (atBuff) {
-			if (atTimer > 0) atTimer--;
-			else {
-				atTimer = 300;
-				atBuff = false;
-			}
-		}
-		// update speed buff
-		if (asBuff) {
-			if (asTimer > 0) {
-				asTimer--;
-				overHeat = MAX_HEAT + 1;
-				if (firing <= 0) {
-					firing = 5;
-					LevelState.manager.getEntityList().add(new Lazer(this, true, atBuff, x + (width / 2), y + (height / 2) - 4));
-				}
-			} else {
-				asTimer = 300;
-				asBuff = false;
-			}
-		}
-
 		return this;
 	}
 
@@ -127,6 +96,8 @@ public class Player extends MapObject {
 		super.render(g);
 
 		if (shield) g.drawImage(Assets.getImageAsset("shield"), (int) x + width / 2, (int) y, width, height, null);
+		
+		if(powerUp != null) updatePowerup(g);
 
 		int r = 6 * (int) overHeat;
 		int max = MAX_HEAT * 6;
@@ -157,6 +128,49 @@ public class Player extends MapObject {
 
 	public void usePowerup() {
 		powerUp.use();
-		powerUp = null;
+		if(powerUp.type == PowerUp.HEAL) powerUp = null;
+	}
+	
+	public void updatePowerup(Graphics2D g) {
+		// update shield
+		if (shield) {
+			if (shieldTimer > 0) {
+				shieldTimer--;
+				powerUp.renderBar(g, shieldTimer, 360);
+			}
+			else {
+				shieldTimer = 360;
+				shield = false;
+				powerUp = null;
+			}
+		}
+		// update attack buff
+		if (atBuff) {
+			if (atTimer > 0) {
+				atTimer--;
+				powerUp.renderBar(g, atTimer, 300);
+			}
+			else {
+				atTimer = 300;
+				atBuff = false;
+				powerUp = null;
+			}
+		}
+		// update speed buff
+		if (asBuff) {
+			if (asTimer > 0) {
+				asTimer--;
+				overHeat = MAX_HEAT + 1;
+				powerUp.renderBar(g, asTimer, 300);
+				if (firing <= 0) {
+					firing = 5;
+					LevelState.manager.getEntityList().add(new Lazer(this, true, atBuff, x + (width / 2), y + (height / 2) - 4));
+				}
+			} else {
+				asTimer = 300;
+				asBuff = false;
+				powerUp = null;
+			}
+		}
 	}
 }

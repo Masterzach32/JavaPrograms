@@ -36,7 +36,7 @@ public class Enemy extends MapObject {
 
 	public MapObject tick() {
 		if (fireTimer > 0) fireTimer--;
-		if (fireTimer == 0) {
+		if (fireTimer == 0 && x < 800) {
 			fireTimer = random.nextInt(240) + 200;
 			LevelState.manager.getEntityList().add(new Lazer(this, false, false, x + (cwidth / 2), y + (cheight / 2)));
 		}

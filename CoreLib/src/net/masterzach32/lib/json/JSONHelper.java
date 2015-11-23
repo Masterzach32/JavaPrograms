@@ -1,4 +1,4 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.json;
 
 import org.json.simple.JSONObject;
 

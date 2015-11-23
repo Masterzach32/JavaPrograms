@@ -1,4 +1,4 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.assets;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -7,6 +7,9 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import net.masterzach32.lib.CoreLib;
+import net.masterzach32.lib.util.Utilities;
 
 public class AssetLoader {
 
@@ -23,10 +26,10 @@ public class AssetLoader {
 		try {
 			URL imageLocation = getClass().getResource(path);
 			bi = ImageIO.read(imageLocation);
-			CoreLib.game.getLogger().logInfo(s + "Loaded Image: " + path);
+			CoreLib.getGame().getLogger().logInfo(s + "Loaded Image: " + path);
 			return bi;
 		} catch (Exception e) {
-			CoreLib.game.getLogger().logWarning(s + "Missing Image: " + path + ".");
+			CoreLib.getGame().getLogger().logWarning(s + "Missing Image: " + path + ".");
 			Utilities.createErrorDialog("Missing Image Asset!", "SpaceFighters can't seem to find this asset: " + path, e);
 			return null;
 		}
@@ -42,15 +45,15 @@ public class AssetLoader {
 		AudioInputStream ais;
 		try {
 			ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(path));
-			CoreLib.game.getLogger().logInfo(s + "Loaded Audio File: " + path);
+			CoreLib.getGame().getLogger().logInfo(s + "Loaded Audio File: " + path);
 			return ais;
 		} catch (UnsupportedAudioFileException e) {
-			CoreLib.game.getLogger().logError(s + "Unsupported Audio File: " + path);
+			CoreLib.getGame().getLogger().logError(s + "Unsupported Audio File: " + path);
 			e.printStackTrace();
 			Utilities.createErrorDialog("Unsupported Audio File!", "SpaceFighters can't use this asset: " + path, e);
 			return null;
 		} catch (Exception e) {
-			CoreLib.game.getLogger().logWarning(s + "Missing Audio File: " + path);
+			CoreLib.getGame().getLogger().logWarning(s + "Missing Audio File: " + path);
 			Utilities.createErrorDialog("Missing Audio Asset!", "SpaceFighters can't seem to find this asset: " + path, e);
 			return null;
 		}
@@ -59,10 +62,10 @@ public class AssetLoader {
 	public String loadFile(String path) {
 		URL imageLocation = getClass().getResource(path);
 		if (imageLocation != null) {
-			CoreLib.game.getLogger().logInfo(s + "Loaded Map: " + path);
+			CoreLib.getGame().getLogger().logInfo(s + "Loaded Map: " + path);
 			return path;
 		} else {
-			CoreLib.game.getLogger().logWarning(s + "Missing Asset: " + path);
+			CoreLib.getGame().getLogger().logWarning(s + "Missing Asset: " + path);
 			return null;
 		}
 	}

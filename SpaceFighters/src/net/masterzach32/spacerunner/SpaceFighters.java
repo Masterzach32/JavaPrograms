@@ -14,6 +14,9 @@ import net.masterzach32.spacerunner.state.menu.*;
 import net.masterzach32.spacerunner.util.*;
 
 import net.masterzach32.lib.*;
+import net.masterzach32.lib.assets.AssetLoader;
+import net.masterzach32.lib.logging.LogHelper;
+import net.masterzach32.lib.util.Utilities;
 
 /**
  * A simple space fighting game for AP Computer Science PP3
@@ -27,13 +30,14 @@ import net.masterzach32.lib.*;
 public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game {
 
 	public static final boolean isUpdateEnabled = true;
+	public static boolean isConsoleEnabled = false;
 	
 	// bunch of stuff for score.
 	public static int score = 0, dscore = 0, tscore = 0, scoreTimer, highScore = 0, gamesPlayed, enemiesKilled;
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final int BUILD = 190;
+	public static final int BUILD = 191;
 	public static final String VERSION = "1.0.1." + BUILD;
 	
 	// Thread and Game instance

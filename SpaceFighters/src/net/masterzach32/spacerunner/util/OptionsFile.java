@@ -1,19 +1,24 @@
 package net.masterzach32.spacerunner.util;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-import net.masterzach32.lib.*;
+import net.masterzach32.lib.json.JSONHelper;
+import net.masterzach32.lib.util.OSUtils;
+import net.masterzach32.lib.util.Utilities;
 import net.masterzach32.spacerunner.SpaceFighters;
 
 /** 
  * OptionsFile contains static methods that use the JSON.simple library
  * to manage writing and reading the game options to a file.
  */
-@SuppressWarnings("unused")
 public class OptionsFile {
 
 	/**
@@ -34,6 +39,7 @@ public class OptionsFile {
 		gameOptions.put("gamesPlayed", SpaceFighters.gamesPlayed);
 		gameOptions.put("enemiesKilled", SpaceFighters.enemiesKilled);
 		gameOptions.put("highScore", SpaceFighters.highScore);
+		gameOptions.put("consoleEnabled", SpaceFighters.isConsoleEnabled);
 		
 		JSONObject graphicsOptions = new JSONObject();
 		graphicsOptions.put("scale", SpaceFighters.SCALE);
@@ -83,6 +89,8 @@ public class OptionsFile {
 		if (i != null) SpaceFighters.gamesPlayed = i;
 		i = JSONHelper.getInteger(gameOptions, "enemiesKilled");
 		if (i != null) SpaceFighters.enemiesKilled = i;
+		b = JSONHelper.getBoolean(gameOptions, "consoleEnabled");
+		if (b != null) SpaceFighters.isConsoleEnabled = b;
 		
 		graphicsOptions = JSONHelper.getJSONObject(gameOptions, "graphicsOptions");
 		i = JSONHelper.getInteger(graphicsOptions, "scale");

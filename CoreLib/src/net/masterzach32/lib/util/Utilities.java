@@ -1,4 +1,4 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.util;
 
 import java.awt.*;
 import java.util.List;
@@ -10,6 +10,8 @@ import java.text.*;
 import java.util.*;
 
 import javax.swing.*;
+
+import net.masterzach32.lib.CoreLib;
 
 public class Utilities {
 
@@ -94,7 +96,7 @@ public class Utilities {
 			failed = false;
 		} catch(Exception e) {
 			t.setText("Download Failed!");
-			CoreLib.game.getLogger().logError("An error occured while downloading: " + url);
+			CoreLib.getGame().getLogger().logError("An error occured while downloading: " + url);
 			e.printStackTrace();
 			createErrorDialog("Download Error", "An error occured while downloading this file:\n" + url, e);
 			failed = true;
@@ -116,7 +118,7 @@ public class Utilities {
         FontMetrics fm = g.getFontMetrics();
         int totalWidth = (fm.stringWidth(text) * 2) + 4;
         
-        int x = (((CoreLib.game.getWindow().getWidth() / CoreLib.game.getScale()) - (totalWidth / 2)) / 2);
+        int x = (((CoreLib.getGame().getWindow().getWidth() / CoreLib.getGame().getScale()) - (totalWidth / 2)) / 2);
         g.drawString(text, x, y);
 	}
 	
@@ -138,7 +140,7 @@ public class Utilities {
 	    final JFileChooser saveAsFileChooser = new JFileChooser();
 	    
 	    saveAsFileChooser.setApproveButtonText("Save");
-	    int actionDialog = saveAsFileChooser.showSaveDialog(CoreLib.game.getWindow());
+	    int actionDialog = saveAsFileChooser.showSaveDialog(CoreLib.getGame().getWindow());
 	    if (actionDialog != JFileChooser.APPROVE_OPTION) {
 	       return null;
 	    }
@@ -173,7 +175,7 @@ public class Utilities {
 	 */
 	public static Point getMousePosition() {
 		Point p1 = MouseInfo.getPointerInfo().getLocation();
-		Point p2 = CoreLib.game.getWindow().getLocationOnScreen();
+		Point p2 = CoreLib.getGame().getWindow().getLocationOnScreen();
 		return new Point(p1.x - p2.x, p1.y - p2.y);
 	}
 	

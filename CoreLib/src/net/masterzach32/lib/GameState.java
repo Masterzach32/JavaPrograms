@@ -2,6 +2,9 @@ package net.masterzach32.lib;
 
 import java.awt.Graphics2D;
 
+import net.masterzach32.lib.assets.AudioPlayer;
+import net.masterzach32.lib.assets.Background;
+
 /**
  * GameState system from SideScroller Project. Allows for a state to do stuff
  * upon being loaded and unloaded

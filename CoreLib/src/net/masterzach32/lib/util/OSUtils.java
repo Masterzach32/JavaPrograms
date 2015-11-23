@@ -1,7 +1,9 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.util;
 
 import java.io.File;
 import java.util.Locale;
+
+import net.masterzach32.lib.CoreLib;
 
 /**
  * Helper class to check the operating system this Java VM runs in
@@ -60,13 +62,13 @@ public final class OSUtils {
 		OSUtils.OSType ostype = OSUtils.getOperatingSystemType();
 		switch (ostype) {
 		    case Windows:
-		    	file = new File(System.getProperty("user.home") + "\\masterzach32\\" + CoreLib.game.getPackageName() + "\\" + fileName);
+		    	file = new File(System.getProperty("user.home") + "\\masterzach32\\" + CoreLib.getGame().getPackageName() + "\\" + fileName);
 		    	break;
 		    case MacOS: 
-		    	file = new File(System.getProperty("user.home") + "/masterzach32/" + CoreLib.game.getPackageName() + "/" + fileName);
+		    	file = new File(System.getProperty("user.home") + "/masterzach32/" + CoreLib.getGame().getPackageName() + "/" + fileName);
 		    	break;
 		    case Linux: 
-		    	file = new File(System.getProperty("user.home") + "/masterzach32/" + CoreLib.game.getPackageName() + "/" + fileName);
+		    	file = new File(System.getProperty("user.home") + "/masterzach32/" + CoreLib.getGame().getPackageName() + "/" + fileName);
 		    	break;
 		    case Other: 
 		    	file = new File(fileName);

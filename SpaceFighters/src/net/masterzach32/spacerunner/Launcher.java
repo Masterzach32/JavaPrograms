@@ -8,6 +8,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import net.masterzach32.lib.*;
+import net.masterzach32.lib.logging.Console;
+import net.masterzach32.lib.util.Utilities;
 import net.masterzach32.spacerunner.util.*;
 
 /**
@@ -21,16 +23,17 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		try {
+			// makes our ui for the update system look nice :)
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			window = new JFrame("SpaceFighters - " + SpaceFighters.VERSION + " Beta");
+			SpaceFighters.game = new SpaceFighters();
+			SpaceFighters.lib = new CoreLib(SpaceFighters.game);
+			if(SpaceFighters.isConsoleEnabled) new Console();
 			SpaceFighters.logger.logInfo("Launching SpaceRunner Build " + SpaceFighters.VERSION);
 			SpaceFighters.logger.logInfo("OS: " + System.getProperty("os.name") + " (" + System.getProperty("os.version") + ")");
 			SpaceFighters.logger.logInfo("OS Archetecture: " + System.getProperty("os.arch"));
 			SpaceFighters.logger.logInfo("Java Version: " + System.getProperty("java.version"));
-			// makes our ui for the update system look nice :)
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			SpaceFighters.logger.logInfo("Creating JFrame");
-			window = new JFrame("SpaceFighters - " + SpaceFighters.VERSION + " Beta");
-			SpaceFighters.game = new SpaceFighters();
-			SpaceFighters.lib = new CoreLib(SpaceFighters.game);
 			OptionsFile.load();
 			resizeGameFrame(false);
 			window.setContentPane(SpaceFighters.game.getPane());

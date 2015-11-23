@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 
 import net.masterzach32.lib.*;
+import net.masterzach32.lib.assets.Background;
+import net.masterzach32.lib.util.Utilities;
 import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 

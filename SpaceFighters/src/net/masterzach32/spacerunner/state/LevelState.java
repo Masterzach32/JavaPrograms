@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.Random;
 
 import net.masterzach32.lib.*;
+import net.masterzach32.lib.assets.Background;
+import net.masterzach32.lib.util.Utilities;
 import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.*;
 import net.masterzach32.spacerunner.mapobject.*;

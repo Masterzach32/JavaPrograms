@@ -1,4 +1,4 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.json;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,6 +7,9 @@ import java.io.RandomAccessFile;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+
+import net.masterzach32.lib.CoreLib;
+import net.masterzach32.lib.util.Utilities;
 
 /**
  * Class responsible for reading repository settings file and getting latest version.
@@ -41,12 +44,12 @@ public class RepoSettings {
 		try {
 			obj = JSONValue.parseWithException(json);
 		} catch (ParseException e) {
-			CoreLib.game.getLogger().logError("Error while parsing repo settings: " + e.toString());
+			CoreLib.getGame().getLogger().logError("Error while parsing repo settings: " + e.toString());
 			return false;
 		}
 		if (!(obj instanceof JSONObject)) {
 			// give up!
-			CoreLib.game.getLogger().logError("Repo file does not begin with a JSON Object");
+			CoreLib.getGame().getLogger().logError("Repo file does not begin with a JSON Object");
 			return false;
 		}
 		repoSettings = (JSONObject)obj;
@@ -54,12 +57,12 @@ public class RepoSettings {
 		// Check the options file version
 		Integer version = JSONHelper.getInteger(repoSettings, "repoVersion");
 		if (version == null) {
-			CoreLib.game.getLogger().logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
+			CoreLib.getGame().getLogger().logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
 		}
 		else if (version > REPO_VERSION) {
 			// a higher version number indicates an incompatible file that
 			// this version of the game does not know how to read
-			CoreLib.game.getLogger().logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
+			CoreLib.getGame().getLogger().logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
 			return false;
 		}
 
@@ -89,7 +92,7 @@ public class RepoSettings {
 		String path = location;
 		byte[] buffer;
 		
-		CoreLib.game.getLogger().logInfo("Loading repo settings file");
+		CoreLib.getGame().getLogger().logInfo("Loading repo settings file");
 		try {
 			// File optionsFile = new File(path);
 			fin = new RandomAccessFile(path, "r");		// "r" = open file for reading only
@@ -99,7 +102,7 @@ public class RepoSettings {
 			// ignore missing options file
 			return false;
 		} catch (IOException e) {
-			CoreLib.game.getLogger().logError("Problem reading " + path);
+			CoreLib.getGame().getLogger().logError("Problem reading " + path);
 			e.printStackTrace();
 			return false;
 		} finally {

@@ -1,6 +1,8 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.assets;
 
 import javax.sound.sampled.*;
+
+import net.masterzach32.lib.util.Utilities;
 
 /**
  * A class for playing audio files in the game. This is not used in

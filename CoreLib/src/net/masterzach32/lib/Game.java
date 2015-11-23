@@ -6,6 +6,11 @@ import java.nio.file.Paths;
 
 import javax.swing.JFrame;
 
+import net.masterzach32.lib.json.RepoSettings;
+import net.masterzach32.lib.logging.LogHelper;
+import net.masterzach32.lib.util.OSUtils;
+import net.masterzach32.lib.util.Utilities;
+
 /**
  * Any game that uses CoreLib must implement this class.
  * 
@@ -42,11 +47,11 @@ public interface Game {
 	 */
 	public static boolean checkForUpdates(Game game) {
 		if(!game.isUpdateEnabled()) {
-			CoreLib.game.getLogger().logInfo("Updates are disabled. This is probably because you are running a beta or nightly build.");
+			CoreLib.getGame().getLogger().logInfo("Updates are disabled. This is probably because you are running a beta or nightly build.");
 			return false;
 		}
 		// get server settings
-		CoreLib.game.getLogger().logInfo("Checking for updates");
+		CoreLib.getGame().getLogger().logInfo("Checking for updates");
 		Path p = Paths.get(OSUtils.getHomeDirectory("repo_settings.json"));
 		Utilities.download(game.getRepoURL() + game.getPackageName() + "/settings.json", p.toString(), "", false);
 		RepoSettings repo = new RepoSettings(p.toString());
@@ -55,7 +60,7 @@ public interface Game {
 		int server = repo.updateBuild;
 		int local = game.getBuildNumber();
 		if(server > local) {
-			CoreLib.game.getLogger().logInfo("Updating to server build " + server);
+			CoreLib.getGame().getLogger().logInfo("Updating to server build " + server);
 			Path path = Paths.get(OSUtils.getHomeDirectory(game.getPackageName() + ".jar"));
 			boolean failed = Utilities.download(game.getRepoURL() + game.getPackageName() + "/downloads/" + game.getPackageName() + "_" + repo.updateBuild + ".jar", path.toString(), "Updating " + repo.name, false);
 			if(!failed) {
@@ -68,7 +73,7 @@ public interface Game {
 					e.printStackTrace();
 				}
 			}
-		} else CoreLib.game.getLogger().logInfo("No update is available");
+		} else CoreLib.getGame().getLogger().logInfo("No update is available");
 		return false;
 	}	
 }

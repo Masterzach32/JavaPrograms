@@ -1,4 +1,4 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.logging;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +8,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import net.masterzach32.lib.CoreLib;
+import net.masterzach32.lib.util.OSUtils;
+import net.masterzach32.lib.util.Utilities;
 
 public class LogHelper {
 	
@@ -52,7 +56,7 @@ public class LogHelper {
                 writer.println(message);
             }
             writer.close();
-            System.out.print("Log saved to " + CoreLib.game.getPackageName() +  "/logs/" + dateFormat.format(date) + ".log");
+            System.out.print("Log saved to " + CoreLib.getGame().getPackageName() +  "/logs/" + dateFormat.format(date) + ".log");
             return true;
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -1,7 +1,9 @@
-package net.masterzach32.lib;
+package net.masterzach32.lib.assets;
 
 import java.awt.*;
 import java.awt.image.*;
+
+import net.masterzach32.lib.CoreLib;
 
 /**
  * A simple class to make moving backgrounds possible
@@ -32,8 +34,8 @@ public class Background {
 	 * @param y
 	 */
 	public void setPosition(double x, double y) {
-		this.x = (x * moveScale) % CoreLib.game.getWidth();
-		this.y = (y * moveScale) % CoreLib.game.getHeight();
+		this.x = (x * moveScale) % CoreLib.getGame().getWidth();
+		this.y = (y * moveScale) % CoreLib.getGame().getHeight();
 	}
 
 	/**
@@ -53,12 +55,12 @@ public class Background {
 	}
 
 	public void render(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, CoreLib.game.getWidth(), CoreLib.game.getHeight(), null);
+		g.drawImage(image, (int) x, (int) y, CoreLib.getGame().getWidth(), CoreLib.getGame().getHeight(), null);
 
 		if (x < 0)
-			g.drawImage(image, (int) x + CoreLib.game.getWidth(), (int) y, CoreLib.game.getWidth(), CoreLib.game.getHeight(), null);
+			g.drawImage(image, (int) x + CoreLib.getGame().getWidth(), (int) y, CoreLib.getGame().getWidth(), CoreLib.getGame().getHeight(), null);
 		if (x > 0)
-			g.drawImage(image, (int) x - CoreLib.game.getWidth(), (int) y, CoreLib.game.getWidth(), CoreLib.game.getHeight(), null);
+			g.drawImage(image, (int) x - CoreLib.getGame().getWidth(), (int) y, CoreLib.getGame().getWidth(), CoreLib.getGame().getHeight(), null);
 		if (x >= 640 || x <= -640)
 			x = 0;
 	}

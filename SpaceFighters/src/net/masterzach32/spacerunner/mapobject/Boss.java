@@ -1,12 +1,13 @@
 package net.masterzach32.spacerunner.mapobject;
 
+import java.awt.Graphics2D;
 import java.util.Random;
 
 import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.state.LevelState;
 
-public class Boss extends MapObject {
+public class Boss extends Enemy {
 	
 	private Random random;
 
@@ -18,6 +19,8 @@ public class Boss extends MapObject {
 		
 		cwidth = 100;
 		cheight = 180;
+		
+		fireTimer = 10;
 		
 		health = level;
 		
@@ -31,12 +34,23 @@ public class Boss extends MapObject {
 	public MapObject tick() {
 		if (x < 525) x += 2;
 		
-		if(health < 0) {
+		if(health <= 0) {
 			remove = true;
 			SpaceFighters.game.addScore(500);
 		}
 		
-		LevelState.manager.getEnemyList().add(new Lazer(this, false, false, x, random.nextInt(height)));
+		if(fireTimer > 0) 
+			fireTimer--;
+		else if(fireTimer == 0) {
+			LevelState.manager.getEntityList().add(new Lazer(this, false, false, x, y + 20 + random.nextInt(140)));
+			fireTimer = 45;
+		}
+		
+		return this;
+	}
+	
+	public MapObject render(Graphics2D g) {
+		super.render(g);
 		
 		return this;
 	}

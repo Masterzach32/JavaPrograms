@@ -14,16 +14,16 @@ import net.masterzach32.spacerunner.state.LevelState;
  */
 public class Enemy extends MapObject {
 
-	public int fireTimer;
-	public Random random;
+	protected int fireTimer;
+	private Random random;
 
-	public Enemy(double x, double y) {
-		super("Enemy", x, y);
+	public Enemy(String name, double x, double y) {
+		super(name, x, y);
 		width = 45;
 		height = 45;
 		cwidth = 40;
 		cheight = 25;
-
+		
 		random = new Random();
 
 		fireTimer = random.nextInt(240) + 200;
@@ -37,7 +37,7 @@ public class Enemy extends MapObject {
 	public MapObject tick() {
 		if (fireTimer > 0) fireTimer--;
 		if (fireTimer == 0 && x < 800) {
-			fireTimer = random.nextInt(240) + 200;
+			fireTimer = random.nextInt(240) + 180;
 			LevelState.manager.getEntityList().add(new Lazer(this, false, false, x + (cwidth / 2), y + (cheight / 2)));
 		}
 		if (health <= 0) {

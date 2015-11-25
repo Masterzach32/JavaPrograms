@@ -41,7 +41,7 @@ public class Lazer extends MapObject {
 		x += dx;
 		if (timer > 0) timer--;
 		if (timer == 0) remove = true;
-		if (!(source instanceof Player) && this.intersects(LevelState.player)) {
+		if (!(source instanceof Player) && intersects(LevelState.player)) {
 			remove = true;
 			LevelState.player.hit(1, source);
 			LevelState.player.flinching = true;
@@ -49,7 +49,7 @@ public class Lazer extends MapObject {
 		}
 		for(int i = 0; i < LevelState.manager.getEnemyList().size(); i++) {
 			MapObject enemy = LevelState.manager.getEnemyList().get(i);
-			if(!(source instanceof Enemy) && enemy.intersects(this)) {
+			if(!(source instanceof Enemy) && intersects(enemy)) {
 				remove = true;
 				enemy.hit(1, source);
 				if(blue) enemy.hit(1, source);
@@ -60,6 +60,7 @@ public class Lazer extends MapObject {
 
 	public MapObject render(Graphics2D g) {
 		super.render(g);
+		
 		return this;
 	}
 }

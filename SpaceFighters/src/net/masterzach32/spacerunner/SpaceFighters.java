@@ -25,7 +25,7 @@ import net.masterzach32.lib.util.Utilities;
  * <https://github.com/Masterzach32/SideScrollerProject>
  * 
  * @author Zach Kozar
- * @version 1.1 Beta
+ * @version 1.0.1 Beta
  */
 public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game {
 
@@ -37,7 +37,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	
 	// dimensions and location of the window
 	public static int WIDTH = 640, HEIGHT = 360, TOP = 0, LEFT = 0, SCALE = 1;
-	public static final int BUILD = 191;
+	public static final int BUILD = 192;
 	public static final String VERSION = "1.0.1." + BUILD;
 	
 	// Thread and Game instance

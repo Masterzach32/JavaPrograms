@@ -63,7 +63,7 @@ public abstract class MapObject {
 		if(onScreen()) {
 			if(facingRight) g.drawImage(image, (int) x, (int) y, width, height, null);
 			else g.drawImage(image, (int) x + width, (int) y + height, -width, -height, null);
-			//g.draw(getHitbox());
+			// g.draw(getHitbox());
 		}
 		return this;
 	}

@@ -33,6 +33,7 @@ public class Utilities {
 	 * @param show
 	 * @return String[]
 	 */
+	@Deprecated
 	public static String[] readTextFile(String path, Path location, boolean show) {
 		download(path, location.toString(), "Downloading Server Files", show);
 		List<String> lines;
@@ -88,7 +89,7 @@ public class Utilities {
 				bout.write(data, 0, i);
 				percent = (totalDataRead * 100) / filesize;
 				current.setValue((int) percent);
-				t.setText((int) (totalDataRead / 1000000) + " MB of " + (int) (filesize / 1000000) + " MB");
+				t.setText((int) (totalDataRead / 1000) + " KB of " + (int) (filesize / 1000) + " KB");
 			}
 			bout.close();
 			in.close();

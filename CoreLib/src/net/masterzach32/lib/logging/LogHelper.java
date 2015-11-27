@@ -45,7 +45,7 @@ public class LogHelper {
 	public boolean saveToLog() {
         PrintWriter writer;
         try {
-    		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy_hh-mm");
+    		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy_hh-mm-ss");
     		Date date = new Date();
     		File logFolder = new File(OSUtils.getHomeDirectory("logs"));
     		if(!logFolder.exists()) {

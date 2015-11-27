@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
@@ -12,22 +14,22 @@ import net.masterzach32.lib.CoreLib;
 import net.masterzach32.lib.util.Utilities;
 
 /**
- * Class responsible for reading repository settings file and getting latest version.
+ * Class responsible for reading repository settings file and getting latest
+ * version.
  * 
  * @author Zach Kozar
  */
 public class RepoSettings {
-	
+
 	/**
 	 * OPTIONS_VERSION identifies the version of the options file format.
-	 * Increase this value whenever incompatible changes are made to the 
-	 * options file format. (Just adding a new JSON field will not
-	 * break compatibility).
+	 * Increase this value whenever incompatible changes are made to the options
+	 * file format. (Just adding a new JSON field will not break compatibility).
 	 */
 	public static final int REPO_VERSION = 1;
-	
+
 	public String name, repoVersion, location;
-	
+
 	public int updateBuild;
 	public String updateURL;
 	public String[] updateChanges;
@@ -52,17 +54,20 @@ public class RepoSettings {
 			CoreLib.getGame().getLogger().logError("Repo file does not begin with a JSON Object");
 			return false;
 		}
-		repoSettings = (JSONObject)obj;
+		repoSettings = (JSONObject) obj;
 
 		// Check the options file version
 		Integer version = JSONHelper.getInteger(repoSettings, "repoVersion");
 		if (version == null) {
 			CoreLib.getGame().getLogger().logWarning("Attempting to read repo settings file without a value for 'repoVersion'");
-		}
-		else if (version > REPO_VERSION) {
+		} else if (version > REPO_VERSION) {
 			// a higher version number indicates an incompatible file that
 			// this version of the game does not know how to read
 			CoreLib.getGame().getLogger().logWarning("Could not read options file from a newer version of the game: " + repoSettings.get("gameVersion"));
+			JOptionPane.showMessageDialog(CoreLib.getGame().getWindow(),
+					"A newer version of " + CoreLib.getGame().getName()
+							+ " has been released, and an inconpatable change\nhas broke the auto updater. Please go download it at http://masterzach32.net/\nAuto updating should then work again as normal.",
+					"Please Update - Repo version out of date", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
 
@@ -70,21 +75,26 @@ public class RepoSettings {
 		String s; Integer i;
 		
 		s = JSONHelper.getString(repoSettings, "gameName");
-		if (s != null) this.name = s;
+		if (s != null)
+			this.name = s;
 		i = JSONHelper.getInteger(repoSettings, "repoVersion");
-		if (i != null) this.repoVersion = s;
+		if (i != null)
+			this.repoVersion = s;
 		
 		JSONObject update = JSONHelper.getJSONObject(repoSettings, "updateInfo");
 		i = JSONHelper.getInteger(update, "build");
-		if (i != null) this.updateBuild = i;
+		if (i != null)
+			this.updateBuild = i;
 		s = JSONHelper.getString(update, "serverFile");
-		if (s != null) this.updateURL = s;
+		if (s != null)
+			this.updateURL = s;
 		
 		return true;
 	}
 
 	/**
-	 * Thanks to StackOverflow user barjak for the example of reading an entire file to a String at
+	 * Thanks to StackOverflow user barjak for the example of reading an entire
+	 * file to a String at
 	 * <http://stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file>
 	 */
 	public boolean load() {
@@ -95,7 +105,7 @@ public class RepoSettings {
 		CoreLib.getGame().getLogger().logInfo("Loading repo settings file");
 		try {
 			// File optionsFile = new File(path);
-			fin = new RandomAccessFile(path, "r");		// "r" = open file for reading only
+			fin = new RandomAccessFile(path, "r"); // "r" = open file for reading only
 			buffer = new byte[(int) fin.length()];
 			fin.readFully(buffer);
 		} catch (FileNotFoundException e) {

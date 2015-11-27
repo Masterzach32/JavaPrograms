@@ -66,11 +66,11 @@ public class EntityManager {
 	public void renderEntities(Graphics2D g) {
 		for (int i = 0; i < entities.size(); i++) {
 			MapObject object = entities.get(i);
-			object.render(g);
+			if(object != null) object.render(g);
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			MapObject object = enemies.get(i);
-			object.render(g);
+			if(object != null) object.render(g);
 		}
 	}
 }

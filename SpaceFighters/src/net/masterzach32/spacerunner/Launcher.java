@@ -27,12 +27,8 @@ public class Launcher {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			window = new JFrame("SpaceFighters - " + SpaceFighters.VERSION + " Beta");
 			SpaceFighters.game = new SpaceFighters();
+			if(SpaceFighters.isConsoleEnabled) new Console(SpaceFighters.game);
 			SpaceFighters.lib = new CoreLib(SpaceFighters.game);
-			if(SpaceFighters.isConsoleEnabled) new Console();
-			SpaceFighters.logger.logInfo("Launching SpaceRunner Build " + SpaceFighters.VERSION);
-			SpaceFighters.logger.logInfo("OS: " + System.getProperty("os.name") + " (" + System.getProperty("os.version") + ")");
-			SpaceFighters.logger.logInfo("OS Archetecture: " + System.getProperty("os.arch"));
-			SpaceFighters.logger.logInfo("Java Version: " + System.getProperty("java.version"));
 			SpaceFighters.logger.logInfo("Creating JFrame");
 			OptionsFile.load();
 			resizeGameFrame(false);

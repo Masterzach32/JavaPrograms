@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
 
 import net.masterzach32.lib.CoreLib;
+import net.masterzach32.lib.Game;
 
 public class Console extends WindowAdapter implements WindowListener, ActionListener, Runnable, KeyListener {
 	
@@ -35,9 +36,9 @@ public class Console extends WindowAdapter implements WindowListener, ActionList
 	/**
 	 * Creates a new console object. Reroutes the console output to this object
 	 */
-	public Console() {
+	public Console(Game game) {
 		// create all components and add them
-		frame = new JFrame(CoreLib.getGame().getName() + " Console - v" + VERSION);
+		frame = new JFrame(game.getName() + " Console - v" + VERSION);
 		
 		console = new JTextArea();
 		console.setEditable(false);

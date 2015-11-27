@@ -32,24 +32,28 @@ public class PowerUp extends MapObject {
 	}
 
 	public MapObject tick() {
-		if (this.intersects(LevelState.player)) {
+		if (intersects(LevelState.player) && LevelState.player.powerUp == null) {
 			LevelState.player.addPowerup(this);
 			this.remove = true;
 		}
 		return this;
 	}
-	
+
 	public void renderBar(Graphics2D g, int ticksLeft, int total) {
-		int percentage = 50*ticksLeft/total;;
+		int percentage = 50 * ticksLeft / total;
 		g.fillRect(10, 285, percentage, 10);
 		g.drawRect(10, 285, 50, 10);
 	}
 
 	public void use() {
-		if (type == HEAL) LevelState.player.health += 2;
-		if (type == ASBUFF) LevelState.player.asBuff = true;
-		if (type == ATBUFF) LevelState.player.atBuff = true;
-		if (type == SHIELD) LevelState.player.shield = true;
+		if (type == HEAL)
+			LevelState.player.health += 2;
+		if (type == ASBUFF)
+			LevelState.player.asBuff = true;
+		if (type == ATBUFF)
+			LevelState.player.atBuff = true;
+		if (type == SHIELD)
+			LevelState.player.shield = true;
 	}
 
 	public BufferedImage getIcon() {

@@ -43,9 +43,11 @@ public class Lazer extends MapObject {
 		if (timer == 0) remove = true;
 		if (!(source instanceof Player) && intersects(LevelState.player)) {
 			remove = true;
-			LevelState.player.hit(1, source);
-			LevelState.player.flinching = true;
-			LevelState.player.flinchTimer = System.nanoTime();
+			if(!LevelState.player.shield) {
+				LevelState.player.hit(1, source);
+				LevelState.player.flinching = true;
+				LevelState.player.flinchTimer = System.nanoTime();
+			}
 		}
 		for(int i = 0; i < LevelState.manager.getEnemyList().size(); i++) {
 			MapObject enemy = LevelState.manager.getEnemyList().get(i);

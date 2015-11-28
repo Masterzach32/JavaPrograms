@@ -26,9 +26,9 @@ public class InfoState extends GameState {
 			"george edward purdy.",
 			"",
 			"thanks to beta testers:",
-			"joevanni tompson kaleb hall",
-			"jack tortland spencer martin",
-			"wilsean wright and anthony kozar",
+			"joevanni tompson      kaleb hall",
+			"     jack tortland      spencer martin",
+			"    wilsean wright      anthony kozar",
 			"copyright masterzach32.net"
 		};
 	

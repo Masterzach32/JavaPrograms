@@ -24,13 +24,11 @@ public interface Game {
 	
 	public int getScale();
 	
-	public boolean isUpdateEnabled();
-	
-	public JFrame getWindow();
-	
-	public LogHelper getLogger();
-	
 	public int getBuildNumber();
+	
+	public boolean close();
+	
+	public boolean isUpdateEnabled();
 	
 	public String getRepoURL();
 	
@@ -38,7 +36,9 @@ public interface Game {
 	
 	public String getName();
 	
-	public boolean close();
+	public JFrame getWindow();
+	
+	public LogHelper getLogger();
 	
 	/**
 	 * Checks to see if their is a newer version of the game available, and downloads it to the users home directory.<br>

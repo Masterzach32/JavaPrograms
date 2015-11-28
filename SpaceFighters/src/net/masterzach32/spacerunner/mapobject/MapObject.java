@@ -36,6 +36,7 @@ public abstract class MapObject {
 		height = 60;
 		cwidth = 40;
 		cheight = 40;
+		
 		hitbox = new Rectangle((int) x, (int) y, cwidth, cheight);
 	}
 

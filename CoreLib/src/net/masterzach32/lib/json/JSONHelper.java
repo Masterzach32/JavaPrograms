@@ -8,8 +8,8 @@ import org.json.simple.JSONObject;
  * @author Zach Kozar
  */
 public class JSONHelper {
-	
-	/** 
+
+	/**
 	 * Attempts to retrieve an integer value from obj with the given key/name.
 	 * Returns null if the key is not present or has a non-numeric value.
 	 * (Floating-point values will be rounded or truncated).
@@ -18,11 +18,10 @@ public class JSONHelper {
 		Object keyobj = obj.get(key);
 		if (keyobj instanceof java.lang.Double) {
 			return new Double(((Number) keyobj).doubleValue());
-		}
-		else return null;
+		} else return null;
 	}
 
-	/** 
+	/**
 	 * Attempts to retrieve an integer value from obj with the given key/name.
 	 * Returns null if the key is not present or has a non-numeric value.
 	 * (Floating-point values will be rounded or truncated).
@@ -31,11 +30,10 @@ public class JSONHelper {
 		Object keyobj = obj.get(key);
 		if (keyobj instanceof java.lang.Number) {
 			return new Integer(((Number) keyobj).intValue());
-		}
-		else return null;
+		} else return null;
 	}
-	
-	/** 
+
+	/**
 	 * Attempts to retrieve a boolean value from obj with the given key/name.
 	 * Returns null if the key is not present or has a non-boolean value.
 	 */
@@ -43,11 +41,10 @@ public class JSONHelper {
 		Object keyobj = obj.get(key);
 		if (keyobj instanceof java.lang.Boolean) {
 			return (Boolean) keyobj;
-		}
-		else return null;
+		} else return null;
 	}
-	
-	/** 
+
+	/**
 	 * Attempts to retrieve a String value from obj with the given key/name.
 	 * Returns null if the key is not present or has a non-string value.
 	 */
@@ -55,11 +52,10 @@ public class JSONHelper {
 		Object keyobj = obj.get(key);
 		if (keyobj instanceof java.lang.String) {
 			return (String) keyobj;
-		}
-		else return null;
+		} else return null;
 	}
-	
-	/** 
+
+	/**
 	 * Attempts to retrieve a JSONObject from obj with the given key/name.
 	 * Returns null if the key is not present or it is not a JSONObject.
 	 */
@@ -67,7 +63,6 @@ public class JSONHelper {
 		Object keyobj = obj.get(key);
 		if (keyobj instanceof JSONObject) {
 			return (JSONObject) keyobj;
-		}
-		else return null;
+		} else return null;
 	}
 }

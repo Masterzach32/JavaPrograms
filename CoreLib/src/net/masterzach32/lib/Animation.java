@@ -59,7 +59,7 @@ public class Animation {
 	}
 	
 	public void render(Graphics2D g, int x, int y, int width, int height) {
-		g.drawImage(this.getImage(), x, y, width, height, null);
+		g.drawImage(getImage(), x, y, width, height, null);
 	}
 	
 	/**

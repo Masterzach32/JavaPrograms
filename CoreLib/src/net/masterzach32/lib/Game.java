@@ -55,6 +55,7 @@ public interface Game {
 		// get server settings
 		CoreLib.getGame().getLogger().logInfo("Checking for updates");
 		Path p = Paths.get(OSUtils.getHomeDirectory("repo_settings.json"));
+		//game.getRepoURL() + game.getPackageName() + "/settings.json"
 		Utilities.download(game.getRepoURL() + game.getPackageName() + "/settings.json", p.toString(), "Downloading Server Settings", false);
 		RepoSettings repo = new RepoSettings(p.toString());
 		repo.load();

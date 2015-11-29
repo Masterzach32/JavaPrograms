@@ -29,7 +29,7 @@ import net.masterzach32.lib.util.Utilities;
  */
 public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game {
 	
-	public static final int BUILD = 195;
+	public static final int BUILD = 196;
 	public static final String VERSION = "1.0.1." + BUILD;
 
 	public static final boolean isUpdateEnabled = true;
@@ -147,7 +147,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 				render();
 
 				elapsed = System.nanoTime() - start;
-				fps = 100000000.0 / (elapsed);
+				fps = 1000000000 / (elapsed);
 
 				wait = targetTime - elapsed / 1000000;
 				if(wait < 0) wait = 5;

@@ -53,9 +53,7 @@ public class Utilities {
 	 * @param url
 	 * @param location
 	 */
-	public static boolean download(String url, String location, String windowName, boolean useWindow) {
-		String site = url;
-		String filename = location;
+	public static boolean download(String url, String location, String windowName, boolean useWindow)  {
 		JFrame frame = new JFrame(windowName);
 		JProgressBar current = new JProgressBar(0, 100);
 		JLabel t = new JLabel();
@@ -74,12 +72,12 @@ public class Utilities {
 		frame.setLocation(dim2.width/2-frame.getSize().width/2, dim2.height/2-frame.getSize().height/2);
 		frame.setVisible(useWindow);
 		try {
-			URL path = new URL(site);
+			URL path = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) path.openConnection();
 			int filesize = connection.getContentLength();
 			double totalDataRead = 0;
 			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
-			FileOutputStream fos = new FileOutputStream(filename);
+			FileOutputStream fos = new FileOutputStream(location);
 			BufferedOutputStream bout = new BufferedOutputStream(fos, 1024);
 			byte[] data = new byte[1024];
 			int i = 0;

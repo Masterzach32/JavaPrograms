@@ -22,7 +22,7 @@ public class InfoState extends GameState {
 			"computer science programing",
 			"project 3. all game assets",
 			"made by zach kozar.",
-			"font \"cyberspace\" created by",
+			"font cyberspace created by",
 			"george edward purdy.",
 			"",
 			"thanks to beta testers:",

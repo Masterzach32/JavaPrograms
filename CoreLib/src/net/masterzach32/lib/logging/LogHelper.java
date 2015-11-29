@@ -16,33 +16,31 @@ import net.masterzach32.lib.util.Utilities;
 public class LogHelper {
 	
 	private String name;
-	private static ArrayList<String> log = new ArrayList<String>();
-	
-	protected static LogHelper logger = new LogHelper("CoreLib");
+	private ArrayList<String> log = new ArrayList<String>();
 	
 	public LogHelper(String name) {
 		this.name = name;
 	}
 
 	public void logInfo(String message) {
-		String s = "[" + Utilities.getTime() + "] " + "[" + name + "] " + "[INFO] " + message;
-		System.out.println(s);
-		log.add(s);
+		String str = "[" + Utilities.getTime() + "] " + "[" + name + "] " + "[INFO] " + message;
+		System.out.println(str);
+		log.add(str);
 	}
 	
 	public void logWarning(String message) {
-		String s = "[" + Utilities.getTime() + "] " + "[" + name + "] " + "[WARNING] " + message;
-		System.out.println(s);
-		log.add(s);
+		String str = "[" + Utilities.getTime() + "] " + "[" + name + "] " + "[WARNING] " + message;
+		System.out.println(str);
+		log.add(str);
 	}
 	
 	public void logError(String message) {
-		String s = "[" + Utilities.getTime() + "] " + "[" + name + "] " + "[ERROR] " + message;
-		System.out.println(s);
-		log.add(s);
+		String str = "[" + Utilities.getTime() + "] " + "[" + name + "] " + "[ERROR] " + message;
+		System.out.println(str);
+		log.add(str);
 	}
 	
-	public boolean saveToLog() {
+	public boolean saveLog() {
         PrintWriter writer;
         try {
     		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy_hh-mm-ss");

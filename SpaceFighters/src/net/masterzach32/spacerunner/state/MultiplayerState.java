@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 
 import net.masterzach32.lib.json.JSONHelper;
 import net.masterzach32.spacerunner.Launcher;
+import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.mapobject.Player;
 
 public class MultiplayerState extends LevelState {
@@ -57,6 +58,7 @@ public class MultiplayerState extends LevelState {
 	public void tick() {
 		if(!connected) return;
 		player.tick();
+		bg.tick();
 		
 		JSONObject playerData = new JSONObject();
 		playerData.put("x", player.x);
@@ -89,7 +91,9 @@ public class MultiplayerState extends LevelState {
 				player.x = JSONHelper.getDouble(playerData, "x");
 				player.y = JSONHelper.getDouble(playerData, "y");
 			}
+			SpaceFighters.logger.logInfo(data.toJSONString());
 			manager.updateList(JSONHelper.getJSONObject(data, "entities"), JSONHelper.getJSONObject(data, "enemies"));
+			this.wave = JSONHelper.getInteger(data, "wave");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

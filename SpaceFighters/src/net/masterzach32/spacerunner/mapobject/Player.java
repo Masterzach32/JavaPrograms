@@ -89,7 +89,6 @@ public class Player extends MapObject {
 				flinching = false;
 			}
 		}
-		SpaceFighters.logger.logInfo(this.toString());
 		return this;
 	}
 

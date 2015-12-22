@@ -24,7 +24,7 @@ public class LevelState extends GameState {
 	public static EntityManager manager;
 	public static Player player, player2;
 
-	private Background bg;
+	public Background bg;
 
 	// wave count
 	public int wave;

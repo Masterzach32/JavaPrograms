@@ -1,7 +1,5 @@
 package net.masterzach32.lib.json;
 
-import java.io.IOException;
-
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;

@@ -48,15 +48,15 @@ public class EntityManager {
 		this.entities.clear();
 		for(int i = 0; i < JSONHelper.getInteger(entities, "size"); i++) {
 			JSONObject entity = JSONHelper.getJSONObject(entities, i + "");
-			if(JSONHelper.getString(entity, "class").equals("Lazer")) this.entities.add(new Lazer(JSONHelper.getJSONObject(entities, i + "")));
-			if(JSONHelper.getString(entity, "class").equals("PowerUp")) this.entities.add(new PowerUp(JSONHelper.getJSONObject(entities, i + "")));
+			if(JSONHelper.getString(entity, "class").equals("Lazer")) this.entities.add(new Lazer(entity));
+			if(JSONHelper.getString(entity, "class").equals("PowerUp")) this.entities.add(new PowerUp(entity));
 		}
 		
 		this.enemies.clear();
 		for(int i = 0; i < JSONHelper.getInteger(enemies, "size"); i++) {
-			JSONObject entity = JSONHelper.getJSONObject(entities, i + "");
-			if(JSONHelper.getString(entity, "class").equals("Enemy")) this.entities.add(new Enemy(JSONHelper.getJSONObject(entities, i + "")));
-			if(JSONHelper.getString(entity, "class").equals("Boss")) this.entities.add(new Boss(JSONHelper.getJSONObject(entities, i + "")));
+			JSONObject entity = JSONHelper.getJSONObject(enemies, i + "");
+			if(JSONHelper.getString(entity, "class").equals("Enemy")) this.entities.add(new Enemy(entity));
+			if(JSONHelper.getString(entity, "class").equals("Boss")) this.entities.add(new Boss(entity));
 		}
 	}
 

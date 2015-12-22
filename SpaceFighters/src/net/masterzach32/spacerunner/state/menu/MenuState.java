@@ -18,7 +18,7 @@ import net.masterzach32.spacerunner.assets.*;
 public class MenuState extends GameState {
 
 	public int currentChoice = 0;
-	public static String[] options = { "play", "co-op (beta)", "help", "credits", "quit" };
+	public static String[] options = { "play", "co-op (coming soon)", "help", "credits", "quit" };
 
 	protected static Color titleColor;
 	protected static Font titleFont;
@@ -107,12 +107,14 @@ public class MenuState extends GameState {
 			if (currentChoice == -1) {
 				currentChoice = options.length - 1;
 			}
+			if(currentChoice == 1) currentChoice = 0;
 		}
 		if (k == KeyEvent.VK_DOWN) {
 			currentChoice++;
 			if (currentChoice == options.length) {
 				currentChoice = 0;
 			}
+			if(currentChoice == 1) currentChoice = 2;
 		}
 	}
 

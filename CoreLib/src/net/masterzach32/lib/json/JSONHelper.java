@@ -1,6 +1,12 @@
 package net.masterzach32.lib.json;
 
+import java.io.IOException;
+
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.ParseException;
+
+import net.masterzach32.lib.CoreLib;
 
 /**
  * Just some helper methods for parsing json files.
@@ -8,6 +14,19 @@ import org.json.simple.JSONObject;
  * @author Zach Kozar
  */
 public class JSONHelper {
+	
+	public static JSONObject getTopLevelJSONObject(String json) {
+		Object data = null;
+		try {
+			data = JSONValue.parseWithException(json);
+		} catch (ParseException e) {
+			CoreLib.getGame().getLogger().logInfo("Error while parsing JSON: " + json);
+		}
+		if (!(data instanceof JSONObject)) {
+			CoreLib.getGame().getLogger().logInfo("Error while parsing JSON: " + json);
+		}
+		return (JSONObject) data;
+	}
 
 	/**
 	 * Attempts to retrieve an integer value from obj with the given key/name.

@@ -6,12 +6,14 @@ import java.awt.image.BufferedImage;
 
 import org.json.simple.JSONObject;
 
+import net.masterzach32.lib.json.JSONHelper;
+
 /**
  * The main entity class
  * 
  * @author Zach Kozar
  */
-public abstract class MapObject {
+public class MapObject {
 
 	public String name;
 	public double x, y;
@@ -39,6 +41,13 @@ public abstract class MapObject {
 		
 		hitbox = new Rectangle((int) x, (int) y, cwidth, cheight);
 	}
+	
+	public MapObject(JSONObject data) {
+		this.name = JSONHelper.getString(data, "name");
+		this.health = JSONHelper.getInteger(data, "h");
+		this.x = JSONHelper.getDouble(data, "x");
+		this.y = JSONHelper.getDouble(data, "y");
+	}
 
 	/**
 	 * Creates a new hitbox
@@ -58,7 +67,9 @@ public abstract class MapObject {
 		return true;
 	}
 
-	public abstract MapObject tick();
+	public MapObject tick() {
+		return this;
+	}
 
 	public MapObject render(Graphics2D g) {
 		if(onScreen()) {
@@ -72,12 +83,11 @@ public abstract class MapObject {
 	@SuppressWarnings("unchecked")
 	public String toString() {
 		JSONObject mapobject = new JSONObject();
+		mapobject.put("class", this.getClass().getSimpleName());
 		mapobject.put("name", name);
-		mapobject.put("health", health);
-		JSONObject pos = new JSONObject();
-		pos.put("x", x);
-		pos.put("y", y);
-		mapobject.put("position", pos);
+		mapobject.put("h", health);
+		mapobject.put("x", x);
+		mapobject.put("y", y);
 		return mapobject.toJSONString();
 	}
 	

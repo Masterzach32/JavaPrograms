@@ -3,6 +3,8 @@ package net.masterzach32.spacerunner.mapobject;
 import java.awt.*;
 import java.util.*;
 
+import org.json.simple.JSONObject;
+
 import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.state.LevelState;
@@ -31,6 +33,22 @@ public class Enemy extends MapObject {
 		facingRight = true;
 
 		health = 2;
+		image = Assets.getImageAsset("alien");
+	}
+
+	public Enemy(JSONObject jsonObject) {
+		super(jsonObject);
+		
+		width = 45;
+		height = 45;
+		cwidth = 40;
+		cheight = 25;
+		
+		random = new Random();
+
+		fireTimer = random.nextInt(240) + 200;
+		
+		facingRight = true;
 		image = Assets.getImageAsset("alien");
 	}
 

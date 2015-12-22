@@ -18,7 +18,7 @@ import net.masterzach32.spacerunner.assets.*;
 public class MenuState extends GameState {
 
 	public int currentChoice = 0;
-	public static String[] options = { "play", "help", "credits", "quit" };
+	public static String[] options = { "play", "co-op (beta)", "help", "credits", "quit" };
 
 	protected static Color titleColor;
 	protected static Font titleFont;
@@ -74,7 +74,7 @@ public class MenuState extends GameState {
 				g.setFont(font);
 				g.setColor(Color.RED);
 			}
-			g.drawString(options[i], 5, (530 + i * 55) / 2);
+			g.drawString(options[i], 5, (475 + i * 55) / 2);
 		}
 		g.setColor(Color.WHITE);
 		g.setFont(font.deriveFont(Font.PLAIN, 17));
@@ -89,10 +89,12 @@ public class MenuState extends GameState {
 		if (currentChoice == 0)
 			GameState.setState(SpaceFighters.level);
 		if (currentChoice == 1)
-			GameState.setState(SpaceFighters.help);
+			GameState.setState(SpaceFighters.multiplayer);
 		if (currentChoice == 2)
-			GameState.setState(SpaceFighters.info);
+			GameState.setState(SpaceFighters.help);
 		if (currentChoice == 3)
+			GameState.setState(SpaceFighters.info);
+		if (currentChoice == 4)
 			SpaceFighters.game.stop();
 	}
 

@@ -29,7 +29,7 @@ import net.masterzach32.lib.util.Utilities;
  */
 public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game {
 	
-	public static final int BUILD = 196;
+	public static final int BUILD = 197;
 	public static final String VERSION = "1.0.1." + BUILD;
 
 	public static final boolean isUpdateEnabled = true;
@@ -62,6 +62,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 	public static HelpState help;
 	public static InfoState info;
 	public static LevelState level;
+	public static MultiplayerState multiplayer;
 	
 	// as it says
 	public static AssetLoader al = new AssetLoader();
@@ -121,6 +122,7 @@ public class SpaceFighters implements Runnable, KeyListener, MouseListener, Game
 		help = new HelpState();
 		info = new InfoState();
 		level = new LevelState();
+		multiplayer = new MultiplayerState();
 		
 		GameState.setState(menu);
 	}

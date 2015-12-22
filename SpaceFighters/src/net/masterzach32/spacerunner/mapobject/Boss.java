@@ -3,6 +3,8 @@ package net.masterzach32.spacerunner.mapobject;
 import java.awt.Graphics2D;
 import java.util.Random;
 
+import org.json.simple.JSONObject;
+
 import net.masterzach32.spacerunner.SpaceFighters;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.state.LevelState;
@@ -16,16 +18,25 @@ public class Boss extends Enemy {
 		
 		width = 100;
 		height = 180;
-		
 		cwidth = 100;
 		cheight = 180;
-		
 		fireTimer = 10;
-		
 		health = level;
-		
 		facingRight = true;
+		random = new Random();
 		
+		image = Assets.getImageAsset("boss");
+	}
+
+	public Boss(JSONObject jsonObject) {
+		super(jsonObject);
+		
+		width = 100;
+		height = 180;
+		cwidth = 100;
+		cheight = 180;
+		fireTimer = 10;
+		facingRight = true;
 		random = new Random();
 		
 		image = Assets.getImageAsset("boss");

@@ -54,7 +54,7 @@ public class LogHelper {
                 writer.println(message);
             }
             writer.close();
-            System.out.print("Log saved to " + CoreLib.getGame().getPackageName() +  "/logs/" + dateFormat.format(date) + ".log");
+            logInfo("Log saved to " + CoreLib.getGame().getPackageName() +  "/logs/" + dateFormat.format(date) + ".log");
             return true;
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();

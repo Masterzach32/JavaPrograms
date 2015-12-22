@@ -2,6 +2,9 @@ package net.masterzach32.spacerunner.mapobject;
 
 import java.awt.Graphics2D;
 
+import org.json.simple.JSONObject;
+
+import net.masterzach32.lib.json.JSONHelper;
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.state.LevelState;
 
@@ -37,6 +40,26 @@ public class Lazer extends MapObject {
 		if (!right) dx = -dx;
 	}
 
+	public Lazer(JSONObject jsonObject) {
+		super(jsonObject);
+		
+		width = 20;
+		height = 8;
+
+		cwidth = 20;
+		cheight = 8;
+
+		timer = JSONHelper.getInteger(jsonObject, "time");
+
+		this.source = null;
+		this.facingRight = JSONHelper.getBoolean(jsonObject, "right");
+		this.blue = JSONHelper.getBoolean(jsonObject, "blue");
+
+		if (!blue) image = Assets.getImageAsset("lazer");
+		else image = Assets.getImageAsset("lazer_blue");
+		if (!facingRight) dx = -dx;
+	}
+
 	public MapObject tick() {
 		x += dx;
 		if (timer > 0) timer--;
@@ -62,7 +85,21 @@ public class Lazer extends MapObject {
 
 	public MapObject render(Graphics2D g) {
 		super.render(g);
-		
 		return this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String toString() {
+		JSONObject mapobject = new JSONObject();
+		mapobject.put("class", this.getClass().getSimpleName());
+		mapobject.put("name", name);
+		mapobject.put("h", health);
+		mapobject.put("x", x);
+		mapobject.put("y", y);
+		mapobject.put("right", facingRight);
+		mapobject.put("blue", blue);
+		mapobject.put("source", source.getClass().getSimpleName());
+		mapobject.put("time", timer);
+		return mapobject.toJSONString();
 	}
 }

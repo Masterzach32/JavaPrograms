@@ -3,6 +3,8 @@ package net.masterzach32.spacerunner.mapobject.powerup;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import org.json.simple.JSONObject;
+
 import net.masterzach32.spacerunner.assets.Assets;
 import net.masterzach32.spacerunner.mapobject.MapObject;
 import net.masterzach32.spacerunner.state.LevelState;
@@ -22,6 +24,18 @@ public class PowerUp extends MapObject {
 	public PowerUp(int type, double x, double y) {
 		super("PowerUp_" + type, x, y);
 		this.type = type;
+		this.width = 40;
+		this.height = 40;
+		this.cwidth = 40;
+		this.cheight = 40;
+		facingRight = true;
+		active = false;
+		image = Assets.getImageAsset("powerBox_" + type);
+	}
+
+	public PowerUp(JSONObject jsonObject) {
+		super(jsonObject);
+		this.type = 0;
 		this.width = 40;
 		this.height = 40;
 		this.cwidth = 40;

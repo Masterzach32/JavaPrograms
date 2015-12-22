@@ -22,7 +22,7 @@ import net.masterzach32.spacerunner.util.*;
 public class LevelState extends GameState {
 
 	public static EntityManager manager;
-	public static Player player;
+	public static Player player, player2;
 
 	private Background bg;
 

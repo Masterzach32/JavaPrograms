@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import org.json.simple.JSONObject;
 
 import net.masterzach32.lib.json.JSONHelper;
+import net.masterzach32.spacerunner.mapobject.powerup.PowerUp;
 
 /**
  * The main entity class
@@ -25,7 +26,7 @@ public class MapObject {
 	public Rectangle hitbox;
 	public BufferedImage image;
 
-	public int health;
+	public int health, id;
 
 	public boolean facingRight, remove = false;
 
@@ -39,14 +40,17 @@ public class MapObject {
 		cwidth = 40;
 		cheight = 40;
 		
+		id = 0;
+		
 		hitbox = new Rectangle((int) x, (int) y, cwidth, cheight);
 	}
 	
 	public MapObject(JSONObject data) {
-		this.name = JSONHelper.getString(data, "name");
+		this.name = JSONHelper.getString(data, "class");
 		this.health = JSONHelper.getInteger(data, "h");
 		this.x = JSONHelper.getDouble(data, "x");
 		this.y = JSONHelper.getDouble(data, "y");
+		this.id = JSONHelper.getInteger(data, "id");
 	}
 
 	/**
@@ -84,10 +88,10 @@ public class MapObject {
 	public String toString() {
 		JSONObject mapobject = new JSONObject();
 		mapobject.put("class", this.getClass().getSimpleName());
-		mapobject.put("name", name);
 		mapobject.put("h", health);
 		mapobject.put("x", x);
 		mapobject.put("y", y);
+		mapobject.put("id", id);
 		return mapobject.toJSONString();
 	}
 	
@@ -97,5 +101,22 @@ public class MapObject {
 
 	public boolean shouldRemove() {
 		return remove;
+	}
+	
+	public MapObject getTypeFromID(int id) {
+		switch(id) {
+			case 1:
+				return new Player(0, 0);
+			case 2:
+				return new Enemy("", 0, 0);
+			case 3:
+				return new Lazer(this, false, false, 0, 0);
+			case 4:
+				return new Boss(0, 0, 0);
+			case 5:
+				return new PowerUp(0, 0, 0);
+			default: 
+				return this;
+		}
 	}
 }

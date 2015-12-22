@@ -30,6 +30,7 @@ public class PowerUp extends MapObject {
 		this.cheight = 40;
 		facingRight = true;
 		active = false;
+		id = 5;
 		image = Assets.getImageAsset("powerBox_" + type);
 	}
 

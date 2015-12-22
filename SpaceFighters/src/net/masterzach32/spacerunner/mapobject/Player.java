@@ -44,6 +44,8 @@ public class Player extends MapObject {
 		heatTimer = 0;
 		
 		facingRight = true;
+		
+		id = 1;
 
 		image = Assets.getImageAsset("spaceship");
 	}

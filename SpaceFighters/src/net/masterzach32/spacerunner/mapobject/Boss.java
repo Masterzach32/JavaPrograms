@@ -24,6 +24,7 @@ public class Boss extends Enemy {
 		health = level;
 		facingRight = true;
 		random = new Random();
+		id = 4;
 		
 		image = Assets.getImageAsset("boss");
 	}

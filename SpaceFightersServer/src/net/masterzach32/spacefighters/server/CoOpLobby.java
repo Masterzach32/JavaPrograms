@@ -15,13 +15,13 @@ import net.masterzach32.spacerunner.mapobject.Enemy;
 import net.masterzach32.spacerunner.mapobject.EntityManager;
 import net.masterzach32.spacerunner.mapobject.Player;
 import net.masterzach32.spacerunner.mapobject.powerup.PowerUp;
+import net.masterzach32.spacerunner.state.LevelState;
 
 public class CoOpLobby extends Thread {
 	
 	private PrintWriter p1Out, p2Out;
 	private BufferedReader p1In, p2In;
 	
-	private EntityManager manager;
 	private Player player1, player2;
 	private int wave = 0;
 	private Random r;
@@ -39,7 +39,7 @@ public class CoOpLobby extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
-		manager = new EntityManager();
+		LevelState.manager = new EntityManager();
 		this.player1 = new Player(0, 0);
 		this.player2 = new Player(0, 0);
 		r = new Random();
@@ -64,24 +64,24 @@ public class CoOpLobby extends Thread {
 				player2.x = JSONHelper.getDouble(JSONHelper.getJSONObject(data, "p2"), "x");
 				player2.y = JSONHelper.getDouble(JSONHelper.getJSONObject(data, "p2"), "y");
 				
-				if(manager.getEnemyList().size() == 0) {
+				if(LevelState.manager.getEnemyList().size() == 0) {
 					wave++;
 					player1.health++;
 					p1Data.put("h", player1.health);
 					player2.health++;
 					p2Data.put("h", player2.health);
 					for (int i = 0; i < 5 * wave; i++)
-						manager.addEnemy(new Enemy("Enemy", r.nextInt(690 * wave) + 900, r.nextInt(230) + 50));
+						LevelState.manager.addEnemy(new Enemy("Enemy", r.nextInt(690 * wave) + 900, r.nextInt(230) + 50));
 					for (int i = 0; i < wave / 4; i++)
-						manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(690 * wave) + 900, r.nextInt(230) + 50));
+						LevelState.manager.addEntity(new PowerUp(r.nextInt(4), r.nextInt(690 * wave) + 900, r.nextInt(230) + 50));
 				}
-				manager.updateEntities();
+				LevelState.manager.updateEntities();
 				
 				data.put("wave", wave);
 				data.put("p1", p1Data);
 				data.put("p2", p2Data);
 				
-				JSONObject temp = manager.getEntitiesInJSON();
+				JSONObject temp = LevelState.manager.getEntitiesInJSON();
 				data.put("entities", JSONHelper.getJSONObject(temp, "entities"));
 				data.put("enemies", JSONHelper.getJSONObject(temp, "enemies"));
 				

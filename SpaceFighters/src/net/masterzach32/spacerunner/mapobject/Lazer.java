@@ -22,6 +22,7 @@ public class Lazer extends MapObject {
 
 	public Lazer(MapObject source, boolean right, boolean blue, double x, double y) {
 		super("Lazer", x, y);
+		id = 3;
 
 		width = 20;
 		height = 8;
@@ -51,7 +52,7 @@ public class Lazer extends MapObject {
 
 		timer = JSONHelper.getInteger(jsonObject, "time");
 
-		this.source = null;
+		this.source = getTypeFromID(JSONHelper.getInteger(jsonObject, "source"));
 		this.facingRight = JSONHelper.getBoolean(jsonObject, "right");
 		this.blue = JSONHelper.getBoolean(jsonObject, "blue");
 
@@ -64,7 +65,7 @@ public class Lazer extends MapObject {
 		x += dx;
 		if (timer > 0) timer--;
 		if (timer == 0) remove = true;
-		if (!(source instanceof Player) && intersects(LevelState.player)) {
+		if (!(source instanceof Player) && LevelState.player != null && intersects(LevelState.player)) {
 			remove = true;
 			if(!LevelState.player.shield) {
 				LevelState.player.hit(1, source);
@@ -96,9 +97,10 @@ public class Lazer extends MapObject {
 		mapobject.put("h", health);
 		mapobject.put("x", x);
 		mapobject.put("y", y);
+		mapobject.put("id", id);
 		mapobject.put("right", facingRight);
 		mapobject.put("blue", blue);
-		mapobject.put("source", source.getClass().getSimpleName());
+		mapobject.put("source", source.id);
 		mapobject.put("time", timer);
 		return mapobject.toJSONString();
 	}
